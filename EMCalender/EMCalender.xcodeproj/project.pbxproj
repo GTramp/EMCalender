@@ -13,6 +13,19 @@
 		C7F34AC32087622C00239101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F34AC22087622C00239101 /* Assets.xcassets */; };
 		C7F34AC62087622C00239101 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F34AC42087622C00239101 /* LaunchScreen.storyboard */; };
 		C7F34AC92087622C00239101 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AC82087622C00239101 /* main.m */; };
+		C7F34AF0208762AB00239101 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AD3208762AB00239101 /* UIColor+Extension.m */; };
+		C7F34AF1208762AB00239101 /* EMCalenderMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ADC208762AB00239101 /* EMCalenderMonth.m */; };
+		C7F34AF2208762AB00239101 /* EMCalender.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ADD208762AB00239101 /* EMCalender.m */; };
+		C7F34AF3208762AB00239101 /* EMIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ADE208762AB00239101 /* EMIndexPath.m */; };
+		C7F34AF4208762AB00239101 /* EMCalenderDay.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ADF208762AB00239101 /* EMCalenderDay.m */; };
+		C7F34AF5208762AB00239101 /* EMCalenderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AE7208762AB00239101 /* EMCalenderDetailView.m */; };
+		C7F34AF6208762AB00239101 /* EMCalenderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AE8208762AB00239101 /* EMCalenderHeader.m */; };
+		C7F34AF7208762AB00239101 /* EMCalenderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AE9208762AB00239101 /* EMCalenderItem.m */; };
+		C7F34AF8208762AB00239101 /* EMCalenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AEA208762AB00239101 /* EMCalenderCell.m */; };
+		C7F34AF9208762AB00239101 /* EMCalenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AEB208762AB00239101 /* EMCalenderView.m */; };
+		C7F34AFA208762AB00239101 /* EMCalenderEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AEC208762AB00239101 /* EMCalenderEditView.m */; };
+		C7F34AFB208762AB00239101 /* EMCalenderController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AEF208762AB00239101 /* EMCalenderController.m */; };
+		C7F34AFE208762BE00239101 /* AppDelegate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AFC208762BE00239101 /* AppDelegate+Extension.m */; };
 		D0AE488A6B06FFE8EF59533E /* libPods-EMCalender.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7FCDCE62B04A6E77C9D5EBB /* libPods-EMCalender.a */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +41,32 @@
 		C7F34AC52087622C00239101 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7F34AC72087622C00239101 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7F34AC82087622C00239101 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C7F34AD2208762AB00239101 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		C7F34AD3208762AB00239101 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		C7F34AD8208762AB00239101 /* EMCalenderMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderMonth.h; sourceTree = "<group>"; };
+		C7F34AD9208762AB00239101 /* EMCalender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalender.h; sourceTree = "<group>"; };
+		C7F34ADA208762AB00239101 /* EMCalenderDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderDay.h; sourceTree = "<group>"; };
+		C7F34ADB208762AB00239101 /* EMIndexPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMIndexPath.h; sourceTree = "<group>"; };
+		C7F34ADC208762AB00239101 /* EMCalenderMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderMonth.m; sourceTree = "<group>"; };
+		C7F34ADD208762AB00239101 /* EMCalender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalender.m; sourceTree = "<group>"; };
+		C7F34ADE208762AB00239101 /* EMIndexPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMIndexPath.m; sourceTree = "<group>"; };
+		C7F34ADF208762AB00239101 /* EMCalenderDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderDay.m; sourceTree = "<group>"; };
+		C7F34AE1208762AB00239101 /* EMCalenderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderHeader.h; sourceTree = "<group>"; };
+		C7F34AE2208762AB00239101 /* EMCalenderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderDetailView.h; sourceTree = "<group>"; };
+		C7F34AE3208762AB00239101 /* EMCalenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderCell.h; sourceTree = "<group>"; };
+		C7F34AE4208762AB00239101 /* EMCalenderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderItem.h; sourceTree = "<group>"; };
+		C7F34AE5208762AB00239101 /* EMCalenderEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderEditView.h; sourceTree = "<group>"; };
+		C7F34AE6208762AB00239101 /* EMCalenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderView.h; sourceTree = "<group>"; };
+		C7F34AE7208762AB00239101 /* EMCalenderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderDetailView.m; sourceTree = "<group>"; };
+		C7F34AE8208762AB00239101 /* EMCalenderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderHeader.m; sourceTree = "<group>"; };
+		C7F34AE9208762AB00239101 /* EMCalenderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderItem.m; sourceTree = "<group>"; };
+		C7F34AEA208762AB00239101 /* EMCalenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderCell.m; sourceTree = "<group>"; };
+		C7F34AEB208762AB00239101 /* EMCalenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderView.m; sourceTree = "<group>"; };
+		C7F34AEC208762AB00239101 /* EMCalenderEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderEditView.m; sourceTree = "<group>"; };
+		C7F34AEE208762AB00239101 /* EMCalenderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCalenderController.h; sourceTree = "<group>"; };
+		C7F34AEF208762AB00239101 /* EMCalenderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCalenderController.m; sourceTree = "<group>"; };
+		C7F34AFC208762BE00239101 /* AppDelegate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Extension.m"; sourceTree = "<group>"; };
+		C7F34AFD208762BE00239101 /* AppDelegate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Extension.h"; sourceTree = "<group>"; };
 		E7FCDCE62B04A6E77C9D5EBB /* libPods-EMCalender.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMCalender.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD8674F7AEBE335EB32744B /* Pods-EMCalender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMCalender.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMCalender/Pods-EMCalender.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,8 +121,11 @@
 		C7F34AB82087622B00239101 /* EMCalender */ = {
 			isa = PBXGroup;
 			children = (
+				C7F34ACF208762AB00239101 /* develop */,
 				C7F34AB92087622B00239101 /* AppDelegate.h */,
 				C7F34ABA2087622B00239101 /* AppDelegate.m */,
+				C7F34AFD208762BE00239101 /* AppDelegate+Extension.h */,
+				C7F34AFC208762BE00239101 /* AppDelegate+Extension.m */,
 				C7F34ABC2087622B00239101 /* ViewController.h */,
 				C7F34ABD2087622B00239101 /* ViewController.m */,
 				C7F34ABF2087622B00239101 /* Main.storyboard */,
@@ -93,6 +135,101 @@
 				C7F34AC82087622C00239101 /* main.m */,
 			);
 			path = EMCalender;
+			sourceTree = "<group>";
+		};
+		C7F34ACF208762AB00239101 /* develop */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AD0208762AB00239101 /* common */,
+				C7F34AD4208762AB00239101 /* class */,
+			);
+			path = develop;
+			sourceTree = "<group>";
+		};
+		C7F34AD0208762AB00239101 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AD1208762AB00239101 /* extension */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		C7F34AD1208762AB00239101 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AD2208762AB00239101 /* UIColor+Extension.h */,
+				C7F34AD3208762AB00239101 /* UIColor+Extension.m */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		C7F34AD4208762AB00239101 /* class */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AD5208762AB00239101 /* calender */,
+			);
+			path = class;
+			sourceTree = "<group>";
+		};
+		C7F34AD5208762AB00239101 /* calender */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AD6208762AB00239101 /* EMCalender */,
+				C7F34AED208762AB00239101 /* controller */,
+			);
+			path = calender;
+			sourceTree = "<group>";
+		};
+		C7F34AD6208762AB00239101 /* EMCalender */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AE0208762AB00239101 /* view */,
+				C7F34AD7208762AB00239101 /* model */,
+			);
+			path = EMCalender;
+			sourceTree = "<group>";
+		};
+		C7F34AD7208762AB00239101 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AD9208762AB00239101 /* EMCalender.h */,
+				C7F34ADD208762AB00239101 /* EMCalender.m */,
+				C7F34ADA208762AB00239101 /* EMCalenderDay.h */,
+				C7F34ADF208762AB00239101 /* EMCalenderDay.m */,
+				C7F34AD8208762AB00239101 /* EMCalenderMonth.h */,
+				C7F34ADC208762AB00239101 /* EMCalenderMonth.m */,
+				C7F34ADB208762AB00239101 /* EMIndexPath.h */,
+				C7F34ADE208762AB00239101 /* EMIndexPath.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		C7F34AE0208762AB00239101 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AE3208762AB00239101 /* EMCalenderCell.h */,
+				C7F34AEA208762AB00239101 /* EMCalenderCell.m */,
+				C7F34AE2208762AB00239101 /* EMCalenderDetailView.h */,
+				C7F34AE7208762AB00239101 /* EMCalenderDetailView.m */,
+				C7F34AE5208762AB00239101 /* EMCalenderEditView.h */,
+				C7F34AEC208762AB00239101 /* EMCalenderEditView.m */,
+				C7F34AE1208762AB00239101 /* EMCalenderHeader.h */,
+				C7F34AE8208762AB00239101 /* EMCalenderHeader.m */,
+				C7F34AE4208762AB00239101 /* EMCalenderItem.h */,
+				C7F34AE9208762AB00239101 /* EMCalenderItem.m */,
+				C7F34AE6208762AB00239101 /* EMCalenderView.h */,
+				C7F34AEB208762AB00239101 /* EMCalenderView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		C7F34AED208762AB00239101 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7F34AEE208762AB00239101 /* EMCalenderController.h */,
+				C7F34AEF208762AB00239101 /* EMCalenderController.m */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +356,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7F34AF4208762AB00239101 /* EMCalenderDay.m in Sources */,
+				C7F34AF1208762AB00239101 /* EMCalenderMonth.m in Sources */,
+				C7F34AF6208762AB00239101 /* EMCalenderHeader.m in Sources */,
 				C7F34ABE2087622B00239101 /* ViewController.m in Sources */,
 				C7F34AC92087622C00239101 /* main.m in Sources */,
+				C7F34AF7208762AB00239101 /* EMCalenderItem.m in Sources */,
+				C7F34AFE208762BE00239101 /* AppDelegate+Extension.m in Sources */,
+				C7F34AF2208762AB00239101 /* EMCalender.m in Sources */,
+				C7F34AFB208762AB00239101 /* EMCalenderController.m in Sources */,
+				C7F34AF8208762AB00239101 /* EMCalenderCell.m in Sources */,
 				C7F34ABB2087622B00239101 /* AppDelegate.m in Sources */,
+				C7F34AF3208762AB00239101 /* EMIndexPath.m in Sources */,
+				C7F34AF5208762AB00239101 /* EMCalenderDetailView.m in Sources */,
+				C7F34AF0208762AB00239101 /* UIColor+Extension.m in Sources */,
+				C7F34AFA208762AB00239101 /* EMCalenderEditView.m in Sources */,
+				C7F34AF9208762AB00239101 /* EMCalenderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +515,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6W77EGW7S3;
 				INFOPLIST_FILE = EMCalender/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.EMCalender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -380,7 +534,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6W77EGW7S3;
 				INFOPLIST_FILE = EMCalender/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.EMCalender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
