@@ -10,6 +10,7 @@
 #import "UIColor+Extension.h"
 #import <Masonry.h>
 #import "EMCalenderDay.h"
+#import <EventKit/EventKit.h>
 
 @interface EMCalenderItem ()
 
@@ -21,6 +22,10 @@
 @property(nonatomic,strong) UILabel * numberLabel;
 /// remimd label
 @property(nonatomic,strong) UILabel * remindLabel;
+/// date label
+@property(nonatomic,strong) UILabel * dateLabel;
+/// event label
+@property(nonatomic,strong) UILabel * eventLabel;
 
 @end
 
@@ -37,6 +42,16 @@
 
 // MARK: - 自定义方法 -
 
+/// 更新事件
+-(void)updateEvent:(EKEvent *)event {
+    if (event) {
+        _eventLabel.hidden = NO;
+        _eventLabel.backgroundColor = [UIColor colorWithCGColor:event.calendar.CGColor];
+        _eventLabel.text = event.title;
+    } else {
+        _eventLabel.hidden = YES;
+    }
+}
 
 // MARK: - setter -
 
@@ -47,6 +62,12 @@
     _numberLabel.text = [NSString stringWithFormat:@"%ld",day.day];
     // text color
     day.isInMonth ? (_numberLabel.backgroundColor = [UIColor colorWithHex:@"#FA8072"]) : (_numberLabel.backgroundColor = [UIColor colorWithHex:@"#C0C0C0"]);
+    
+    // date label
+    _dateLabel.text = [NSString stringWithFormat:@"%ld-%02ld",day.year,day.month];
+    
+    // 更新事件
+    [self updateEvent:day.event];
 }
 
 -(void)setBorderColor:(UIColor *)borderColor {
@@ -101,9 +122,43 @@
         make.left.right.mas_equalTo(self);
         make.height.mas_equalTo(24.f);
     }];
+    
+    // date label
+    [self addSubview:self.dateLabel];
+    [_dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.right.mas_equalTo(self);
+    }];
+    
+    // event Label
+    [self addSubview:self.eventLabel];
+    [_eventLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self);
+        make.bottom.mas_equalTo(self.dateLabel.mas_top);
+        make.height.mas_equalTo(32.f);
+    }];
 }
 
 // MARK: - 懒加载 -
+
+/// event label
+-(UILabel *)eventLabel {
+    if (!_eventLabel) {
+        _eventLabel = [[UILabel alloc] init];
+        _eventLabel.backgroundColor = [UIColor colorWithHex:@"#40E0D0"];
+        _eventLabel.hidden = YES;
+    }
+    return _eventLabel;
+}
+
+/// date label
+-(UILabel *)dateLabel {
+    if (!_dateLabel) {
+        _dateLabel = [[UILabel alloc] init];
+        _dateLabel.textColor = [UIColor blueColor];
+        _dateLabel.font = [UIFont systemFontOfSize:10.f];
+    }
+    return _dateLabel;
+}
 
 /// remind label
 -(UILabel *)remindLabel {

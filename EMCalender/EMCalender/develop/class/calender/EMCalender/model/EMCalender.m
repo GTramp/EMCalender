@@ -29,40 +29,215 @@
     if (self = [super init]) {
         // initialzation
         [self initialzation];
-        
-        // FIXME: - 测试 -
-        [self loadEvents];
     }
     return self;
 }
 
 // MARK: - 自定义方法 -
 
-/// 获取 EKEvent
--(void)loadEvents {
+/// 年份数组排序
+-(NSArray<EMCalenderMonth *> *)sortCaldenderMonthArray:(NSArray<EMCalenderMonth *> *)months {
+    return [months sortedArrayUsingComparator:^NSComparisonResult(EMCalenderMonth * obj1,EMCalenderMonth * obj2) {
+        return [obj1.date compare:obj2.date];
+    }];
+}
+
+/// 异步获取年份数组
+-(void)asynchronousLoadDataForYear:(NSInteger) year completionHandler:(void(^)(NSArray<EMCalenderMonth *> * array)) completionHandler {
+    
+    // default month count
+    NSInteger monthCount = 12;
+    // EMCalenderMonth array
+    NSMutableArray<EMCalenderMonth *> * monthArr = [NSMutableArray arrayWithCapacity:monthCount + 2];
+    // GCD 队列组
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (NSInteger i = 0; i < monthCount; i++) {
+        dispatch_group_enter(group);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self synchronizeLoadDataForMonth:i+1 inYear:year completionHanlder:^(EMCalenderMonth *caldnderMonth) {
+                [monthArr addObject:caldnderMonth];
+                dispatch_group_leave(group);
+            }];
+        });
+    }
+    
+    // last year last month
+    dispatch_group_enter(group);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self synchronizeLoadDataForMonth:12 inYear:year-1 completionHanlder:^(EMCalenderMonth *caldnderMonth) {
+            [monthArr addObject:caldnderMonth];
+            dispatch_group_leave(group);
+        }];
+    });
+    
+    // next year first month
+    dispatch_group_enter(group);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self synchronizeLoadDataForMonth:1 inYear:year+1 completionHanlder:^(EMCalenderMonth *caldnderMonth) {
+            [monthArr addObject:caldnderMonth];
+            dispatch_group_leave(group);
+        }];
+    });
+    
+    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 排序
+        NSArray<EMCalenderMonth *> * array = [self sortCaldenderMonthArray:monthArr];
+        // invoke completion block in mian queue
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completionHandler) {
+                completionHandler(array);
+            }
+        });
+    });
+}
+
+
+/// 获取月份数据(同步)
+-(void)synchronizeLoadDataForMonth:(NSInteger) month
+                            inYear:(NSInteger) year
+                 completionHanlder:(void(^)(EMCalenderMonth * caldnderMonth)) completionHanlder {
+    
+    // length
+    NSInteger length = 35;
+    // day count
+    NSInteger dayCount = [self numberOfMonth:month inYear:year];
+    // first week day
+    NSInteger first = [self firstWeekDayOfMonth:month inYear:year];
+    /// ----------------------- start / end date ----------------------------------------------
+    // start date
+    NSDate * startDate = nil;
+    if (first) {
+        if (month == 1) {
+            // 上个月的dayCount
+            NSInteger lastDayCount = [self numberOfMonth:12 inYear:year-1];
+            // start date
+            NSString * dateString = [NSString stringWithFormat:@"%ld-12-%02ld 00:00:00",year-1, lastDayCount - first + 1];
+            startDate = [_dateFormatter dateFromString:dateString];
+            
+            if (startDate == nil) {
+                
+            }
+            
+        } else {
+            // 上个月的dayCount
+            NSInteger lastDayCount = [self numberOfMonth:month-1 inYear:year];
+            // start date
+            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 00:00:00",year,month-1, lastDayCount - first + 1];
+            startDate = [_dateFormatter dateFromString:dateString];
+            
+            if (startDate == nil) {
+                
+            }
+        }
+    } else {
+        // start date
+        NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-01 00:00:00",year,month];
+        startDate = [_dateFormatter dateFromString:dateString];
+        
+        if (startDate == nil) {
+            
+        }
+    }
+    
+    // end date
+    NSDate * endDate = nil;
+    NSInteger next = length - dayCount - first;
+    if (next > 0) {
+        if (month == 12) {
+            // date string
+            NSString * dateString = [NSString stringWithFormat:@"%ld-01-%02ld 23:59:59",year+1,next];
+            // end date
+            endDate = [_dateFormatter dateFromString:dateString];
+            if (endDate == nil) {
+                
+            }
+        } else {
+            // date string
+            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 23:59:59",year, month+1, next];
+            // end date
+            endDate = [_dateFormatter dateFromString:dateString];
+            if (endDate == nil) {
+                
+            }
+        }
+        
+    } else if (next == 0) {
+        // date string
+        NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 23:59:59",year,month,dayCount];
+        // end date
+        endDate = [_dateFormatter dateFromString:dateString];
+        if (endDate == nil) {
+            
+        }
+    } else {
+        // date string
+        NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 23:59:59",year,month,length-first];
+        // end date
+        endDate = [_dateFormatter dateFromString:dateString];
+        if (endDate == nil) {
+            
+        }
+    }
+    
+    
+    /// ------------------------ EventKit -------------------------------------------------------
     // 获取授权
     __weak typeof(self) weakSelf = self;
-    [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
+    [self->_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
         if (!granted) {
-            NSLog(@"用户授权失败-> error: %@",error);
-            return;
+            NSLog(@"%@",error);
+            return ;
         }
-        //  谓词
-        NSDateComponents * components = [[NSDateComponents alloc] init];
-        components.year = -1;
         
-        NSDate * start = [weakSelf.calender dateByAddingComponents:components
-                                                            toDate:[NSDate date]
-                                                           options:0];
-        NSDate * end = [NSDate date];
+        // 谓词
+        NSPredicate * predicate = [weakSelf.eventStore predicateForEventsWithStartDate:startDate
+                                                                               endDate:endDate
+                                                                             calendars:nil];
+        // 获取 EKEvent
+        NSArray<EKEvent*> * events = [weakSelf.eventStore eventsMatchingPredicate:predicate];
+        // NSMutableArray<EMCalenderDay*>
+        NSMutableArray<EMCalenderDay *> * dayArr = [NSMutableArray arrayWithCapacity:length];
+        for (NSInteger i = 0; i < length; i ++) {
+            // date
+            NSDate * date = [startDate dateByAddingTimeInterval:(60*60*24) * i];
+            // date components
+            NSDateComponents * components = [weakSelf.calender components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay
+                                                                 fromDate:date];
+            // EMCalenderDay
+            EMCalenderDay * calenderDay = [[EMCalenderDay alloc] init];
+            // 赋值
+            calenderDay.date = date;
+            calenderDay.year = components.year;
+            calenderDay.month = components.month;
+            calenderDay.day = components.day;
+            components.month == month ? (calenderDay.inMonth = YES) : (calenderDay.inMonth = NO);
+            
+            // EKEvent
+            for (EKEvent * event in events) {
+                NSComparisonResult result1 = [event.startDate compare:date];
+                NSComparisonResult result2 = [event.endDate compare:date];
+                if (result1 == NSOrderedSame  || result2 == NSOrderedSame || (result1 == NSOrderedAscending && result2 == NSOrderedDescending)) {
+                    calenderDay.event = event;
+                }
+            }
+            // 加入 array
+            [dayArr addObject:calenderDay];
+        }
         
-        NSPredicate * prediceate = [weakSelf.eventStore predicateForEventsWithStartDate:start
-                                                                                endDate:end
-                                                                              calendars:nil];
-        NSArray<EKEvent * >* events = [weakSelf.eventStore eventsMatchingPredicate:prediceate];
+        // date
+        NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-01 00:00:00",year,month];
+        NSDate * date = [weakSelf.dateFormatter dateFromString:dateString];
+        // EMCalenderMonth
+        EMCalenderMonth * calenderMonth = [[EMCalenderMonth alloc] init];
+        calenderMonth.date = date;
+        calenderMonth.year = year;
+        calenderMonth.month = month;
+        calenderMonth.days = dayArr;
         
-        for (EKEvent * event in events) {
-            NSLog(@"%@",event);
+        // invoke completion block in main queue
+        if (completionHanlder) {
+            completionHanlder(calenderMonth);
         }
     }];
 }
@@ -135,9 +310,8 @@
             calenderDay.month = _month;
             // day
             calenderDay.day = _dayCount - first + i;
-            // date
-            _dateFormatter.dateFormat = @"yyyy-MM-dd";
-            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld",calenderDay.year,calenderDay.month,calenderDay.day];
+
+            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 00:00:00",calenderDay.year,calenderDay.month,calenderDay.day];
             calenderDay.date = [_dateFormatter dateFromString:dateString];
             
             // in month
@@ -160,9 +334,8 @@
             calenderDay.month = _month;
             // day
             calenderDay.day = (++ startIndex);
-            // date
-            _dateFormatter.dateFormat = @"yyyy-MM-dd";
-            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld",calenderDay.year,calenderDay.month,calenderDay.day];
+
+            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 00:00:00",calenderDay.year,calenderDay.month,calenderDay.day];
             calenderDay.date = [_dateFormatter dateFromString:dateString];
             
             // in month
@@ -175,9 +348,8 @@
             calenderDay.month = month;
             // day
             calenderDay.day = i - first;
-            // date
-            _dateFormatter.dateFormat = @"yyyy-MM-dd";
-            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld",calenderDay.year,calenderDay.month,calenderDay.day];
+            
+            NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 00:00:00",calenderDay.year,calenderDay.month,calenderDay.day];
             calenderDay.date = [_dateFormatter dateFromString:dateString];
             
             // in month
@@ -193,10 +365,8 @@
 
 /// 获取每月的第一天为周几 0. Sunday 1. Monday 2. Tuesday 3. Wednesday 4. Thursday 5. Friday 6. Saturday
 -(NSInteger)firstWeekDayOfMonth:(NSInteger) month inYear:(NSInteger) year {
-    // date formatter
-    _dateFormatter.dateFormat = @"yyyy-MM-dd";
     // date string
-    NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-01",year,month];
+    NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-01 00:00:00",year,month];
     // date
     NSDate * date = [_dateFormatter dateFromString:dateString];
     NSInteger weekDay = [_calender ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitWeekOfMonth forDate:date];
@@ -206,10 +376,8 @@
 
 /// 获取每月的天数
 -(NSInteger)numberOfMonth:(NSInteger)month inYear:(NSInteger) year {
-    // date formatter
-    _dateFormatter.dateFormat = @"yyyy-MM-dd";
     // date string
-    NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-01",year,month];
+    NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-01 00:00:00",year,month];
     // date
     NSDate * date = [_dateFormatter dateFromString:dateString];
     // NSRange
@@ -239,9 +407,10 @@
 /// initialzation
 -(void)initialzation {
     // calender
-    _calender = [NSCalendar currentCalendar];
+    _calender = [NSCalendar autoupdatingCurrentCalendar];
     // date formatter
     _dateFormatter = [[NSDateFormatter alloc] init];
+    _dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     // event store
     _eventStore = [[EKEventStore alloc] init];
 }

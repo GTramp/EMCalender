@@ -153,19 +153,6 @@
     }
 }
 
-/// 加载数据
--(void)loadDataForYear:(NSInteger)year completionHandler:(void(^)(NSArray<EMCalenderMonth *> * array) ) completionHandler {
-    // 异步加载
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray<EMCalenderMonth *> * array = [self->_calender dataForYear:year];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (completionHandler) {
-                completionHandler(array);
-            }
-        });
-    });
-}
-
 /// 循环 展示
 -(void)showCellInLoop:(UIScrollView *) scrollView {
     // 获取当前index
@@ -179,7 +166,7 @@
         _currentMonth = 1;
         // refresh data
         __weak typeof(self) weakSelf = self;
-        [self loadDataForYear:_currentYear completionHandler:^(NSArray<EMCalenderMonth *> *array) {
+        [_calender asynchronousLoadDataForYear:_currentYear completionHandler:^(NSArray<EMCalenderMonth *> *array) {
             // 刷新数据
             weakSelf.dataArray = array;
             [weakSelf.calenderCollection reloadData];
@@ -190,9 +177,6 @@
             [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath
                                                 atScrollPosition:UICollectionViewScrollPositionNone
                                                         animated:NO];
-            // invoke delegate method
-            [weakSelf invokeDelegateChange:weakSelf.currentYear
-                                     month:weakSelf.currentMonth];
         }];
         
     } else if (index == 0) { // 滑动到了最左端
@@ -203,7 +187,7 @@
         
         // refresh data
         __weak typeof(self) weakSelf = self;
-        [self loadDataForYear:_currentYear completionHandler:^(NSArray<EMCalenderMonth *> *array) {
+        [_calender asynchronousLoadDataForYear:_currentYear completionHandler:^(NSArray<EMCalenderMonth *> *array) {
             // 刷新数据
             weakSelf.dataArray = array;
             [weakSelf.calenderCollection reloadData];
@@ -214,20 +198,23 @@
             [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath
                                                 atScrollPosition:UICollectionViewScrollPositionNone
                                                         animated:NO];
-            // invoke delegate method
-            [weakSelf invokeDelegateChange:weakSelf.currentYear
-                                     month:weakSelf.currentMonth];
         }];
         
     } else { // 1 - 12
         // update current month
         _currentMonth = index;
-        // invoke delegate method
-        [self invokeDelegateChange:_currentYear month:_currentMonth];
     }
 }
 
 // MARK: - UIScrollViewDelegate -
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width  + 0.5;
+    
+    if (index != 0 && index != 13) {
+        [self invokeDelegateChange:_currentYear month:index];
+    }
+}
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // 循环展示
@@ -266,7 +253,7 @@
     
     // load data
     __weak typeof(self) weakSelf = self;
-    [self loadDataForYear:_currentYear completionHandler:^(NSArray<EMCalenderMonth *> *array) {
+    [_calender asynchronousLoadDataForYear:_currentYear completionHandler:^(NSArray<EMCalenderMonth *> *array) {
         // 刷新数据
         weakSelf.dataArray = array;
         [weakSelf.calenderCollection reloadData];

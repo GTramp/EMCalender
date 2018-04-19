@@ -174,8 +174,8 @@
 		C7F34AD5208762AB00239101 /* calender */ = {
 			isa = PBXGroup;
 			children = (
-				C7F34AD6208762AB00239101 /* EMCalender */,
 				C7F34AED208762AB00239101 /* controller */,
+				C7F34AD6208762AB00239101 /* EMCalender */,
 			);
 			path = calender;
 			sourceTree = "<group>";
@@ -207,18 +207,18 @@
 		C7F34AE0208762AB00239101 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				C7F34AE6208762AB00239101 /* EMCalenderView.h */,
+				C7F34AEB208762AB00239101 /* EMCalenderView.m */,
 				C7F34AE3208762AB00239101 /* EMCalenderCell.h */,
 				C7F34AEA208762AB00239101 /* EMCalenderCell.m */,
+				C7F34AE4208762AB00239101 /* EMCalenderItem.h */,
+				C7F34AE9208762AB00239101 /* EMCalenderItem.m */,
 				C7F34AE2208762AB00239101 /* EMCalenderDetailView.h */,
 				C7F34AE7208762AB00239101 /* EMCalenderDetailView.m */,
 				C7F34AE5208762AB00239101 /* EMCalenderEditView.h */,
 				C7F34AEC208762AB00239101 /* EMCalenderEditView.m */,
 				C7F34AE1208762AB00239101 /* EMCalenderHeader.h */,
 				C7F34AE8208762AB00239101 /* EMCalenderHeader.m */,
-				C7F34AE4208762AB00239101 /* EMCalenderItem.h */,
-				C7F34AE9208762AB00239101 /* EMCalenderItem.m */,
-				C7F34AE6208762AB00239101 /* EMCalenderView.h */,
-				C7F34AEB208762AB00239101 /* EMCalenderView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class EKEvent;
 @interface EMCalenderDay : NSObject
 
 /// NSDate
@@ -20,5 +21,8 @@
 @property(nonatomic,assign) NSInteger day;
 /// in month
 @property(nonatomic,assign,getter=isInMonth) BOOL inMonth;
+
+/// EKEvent
+@property(nonatomic,strong) EKEvent * event;
 
 @end

@@ -10,4 +10,10 @@
 
 @implementation EMCalenderMonth
 
+
+-(NSString *)description {
+    NSArray * keys = @[@"date",@"year",@"month"];
+    return [self dictionaryWithValuesForKeys:keys].description;
+}
+
 @end
