@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate+Extension.h"
-#import "EMCalenderController.h"
+#import "EMMainController.h"
 
 @implementation AppDelegate (Extension)
 
@@ -20,7 +20,7 @@
 /// 初始化窗口
 -(void)initWindow {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    EMCalenderController * calenderVC = [[EMCalenderController alloc] init];
+    EMMainController * calenderVC = [[EMMainController alloc] init];
     UINavigationController * navigationVC = [[UINavigationController alloc] initWithRootViewController:calenderVC];
     self.window.rootViewController = navigationVC;
     [self.window makeKeyAndVisible];

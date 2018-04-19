@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C74696DB2088851200C7EF8C /* EMMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74696DA2088851200C7EF8C /* EMMainController.m */; };
 		C7F34ABB2087622B00239101 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ABA2087622B00239101 /* AppDelegate.m */; };
 		C7F34ABE2087622B00239101 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ABD2087622B00239101 /* ViewController.m */; };
 		C7F34AC12087622B00239101 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F34ABF2087622B00239101 /* Main.storyboard */; };
@@ -31,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		ADC98FDB66600B3BDD7C732A /* Pods-EMCalender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMCalender.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMCalender/Pods-EMCalender.release.xcconfig"; sourceTree = "<group>"; };
+		C74696D92088851200C7EF8C /* EMMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMMainController.h; sourceTree = "<group>"; };
+		C74696DA2088851200C7EF8C /* EMMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMMainController.m; sourceTree = "<group>"; };
 		C7F34AB62087622B00239101 /* EMCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F34AB92087622B00239101 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C7F34ABA2087622B00239101 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,6 +103,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C74696D8208884FB00C7EF8C /* main */ = {
+			isa = PBXGroup;
+			children = (
+				C74696D92088851200C7EF8C /* EMMainController.h */,
+				C74696DA2088851200C7EF8C /* EMMainController.m */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
 		C7F34AAD2087622B00239101 = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +178,7 @@
 		C7F34AD4208762AB00239101 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				C74696D8208884FB00C7EF8C /* main */,
 				C7F34AD5208762AB00239101 /* calender */,
 			);
 			path = class;
@@ -370,6 +383,7 @@
 				C7F34AF3208762AB00239101 /* EMIndexPath.m in Sources */,
 				C7F34AF5208762AB00239101 /* EMCalenderDetailView.m in Sources */,
 				C7F34AF0208762AB00239101 /* UIColor+Extension.m in Sources */,
+				C74696DB2088851200C7EF8C /* EMMainController.m in Sources */,
 				C7F34AFA208762AB00239101 /* EMCalenderEditView.m in Sources */,
 				C7F34AF9208762AB00239101 /* EMCalenderView.m in Sources */,
 			);

@@ -35,13 +35,6 @@
 
 // MARK: - 自定义方法 -
 
-/// 年份数组排序
--(NSArray<EMCalenderMonth *> *)sortCaldenderMonthArray:(NSArray<EMCalenderMonth *> *)months {
-    return [months sortedArrayUsingComparator:^NSComparisonResult(EMCalenderMonth * obj1,EMCalenderMonth * obj2) {
-        return [obj1.date compare:obj2.date];
-    }];
-}
-
 /// 异步获取年份数组
 -(void)asynchronousLoadDataForYear:(NSInteger) year completionHandler:(void(^)(NSArray<EMCalenderMonth *> * array)) completionHandler {
     
@@ -51,7 +44,7 @@
     NSMutableArray<EMCalenderMonth *> * monthArr = [NSMutableArray arrayWithCapacity:monthCount + 2];
     // GCD 队列组
     dispatch_group_t group = dispatch_group_create();
-    
+    // 加入队列组
     for (NSInteger i = 0; i < monthCount; i++) {
         dispatch_group_enter(group);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -82,11 +75,14 @@
     
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // 排序
-        NSArray<EMCalenderMonth *> * array = [self sortCaldenderMonthArray:monthArr];
+        [monthArr sortUsingComparator:^NSComparisonResult(EMCalenderMonth * obj1,EMCalenderMonth * obj2) {
+            return [obj1.date compare:obj2.date];
+        }];
+        
         // invoke completion block in mian queue
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completionHandler) {
-                completionHandler(array);
+                completionHandler(monthArr);
             }
         });
     });
@@ -114,30 +110,17 @@
             // start date
             NSString * dateString = [NSString stringWithFormat:@"%ld-12-%02ld 00:00:00",year-1, lastDayCount - first + 1];
             startDate = [_dateFormatter dateFromString:dateString];
-            
-            if (startDate == nil) {
-                
-            }
-            
         } else {
             // 上个月的dayCount
             NSInteger lastDayCount = [self numberOfMonth:month-1 inYear:year];
             // start date
             NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 00:00:00",year,month-1, lastDayCount - first + 1];
             startDate = [_dateFormatter dateFromString:dateString];
-            
-            if (startDate == nil) {
-                
-            }
         }
     } else {
         // start date
         NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-01 00:00:00",year,month];
         startDate = [_dateFormatter dateFromString:dateString];
-        
-        if (startDate == nil) {
-            
-        }
     }
     
     // end date
@@ -149,17 +132,11 @@
             NSString * dateString = [NSString stringWithFormat:@"%ld-01-%02ld 23:59:59",year+1,next];
             // end date
             endDate = [_dateFormatter dateFromString:dateString];
-            if (endDate == nil) {
-                
-            }
         } else {
             // date string
             NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 23:59:59",year, month+1, next];
             // end date
             endDate = [_dateFormatter dateFromString:dateString];
-            if (endDate == nil) {
-                
-            }
         }
         
     } else if (next == 0) {
@@ -167,24 +144,18 @@
         NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 23:59:59",year,month,dayCount];
         // end date
         endDate = [_dateFormatter dateFromString:dateString];
-        if (endDate == nil) {
-            
-        }
     } else {
         // date string
         NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 23:59:59",year,month,length-first];
         // end date
         endDate = [_dateFormatter dateFromString:dateString];
-        if (endDate == nil) {
-            
-        }
     }
     
     
     /// ------------------------ EventKit -------------------------------------------------------
     // 获取授权
     __weak typeof(self) weakSelf = self;
-    [self->_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
+    [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
         if (!granted) {
             NSLog(@"%@",error);
             return ;
@@ -195,7 +166,9 @@
                                                                                endDate:endDate
                                                                              calendars:nil];
         // 获取 EKEvent
+        
         NSArray<EKEvent*> * events = [weakSelf.eventStore eventsMatchingPredicate:predicate];
+        
         // NSMutableArray<EMCalenderDay*>
         NSMutableArray<EMCalenderDay *> * dayArr = [NSMutableArray arrayWithCapacity:length];
         for (NSInteger i = 0; i < length; i ++) {
@@ -310,7 +283,7 @@
             calenderDay.month = _month;
             // day
             calenderDay.day = _dayCount - first + i;
-
+            
             NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 00:00:00",calenderDay.year,calenderDay.month,calenderDay.day];
             calenderDay.date = [_dateFormatter dateFromString:dateString];
             
@@ -334,7 +307,7 @@
             calenderDay.month = _month;
             // day
             calenderDay.day = (++ startIndex);
-
+            
             NSString * dateString = [NSString stringWithFormat:@"%ld-%02ld-%02ld 00:00:00",calenderDay.year,calenderDay.month,calenderDay.day];
             calenderDay.date = [_dateFormatter dateFromString:dateString];
             

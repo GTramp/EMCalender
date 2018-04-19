@@ -46,8 +46,9 @@
 -(void)updateEvent:(EKEvent *)event {
     if (event) {
         _eventLabel.hidden = NO;
-        _eventLabel.backgroundColor = [UIColor colorWithCGColor:event.calendar.CGColor];
+        _eventLabel.backgroundColor = [UIColor colorWithCGColor: event.calendar.CGColor];
         _eventLabel.text = event.title;
+        
     } else {
         _eventLabel.hidden = YES;
     }
