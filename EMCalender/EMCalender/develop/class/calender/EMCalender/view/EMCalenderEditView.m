@@ -98,6 +98,9 @@
         self.sortView.transform = CGAffineTransformMakeTranslation(0, 240.f);
         self.alpha = 0.f;
     } completion:^(BOOL finished) {
+        // update to original transform
+        self.scheduleView.transform = CGAffineTransformIdentity;
+        self.taskView.transform = CGAffineTransformIdentity;
         [self removeFromSuperview];
     }];
 }

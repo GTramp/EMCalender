@@ -19,6 +19,8 @@
 @property(nonatomic,assign) NSInteger month;
 /// day
 @property(nonatomic,assign) NSInteger day;
+/// week day
+@property(nonatomic,assign) NSInteger weakDay;
 /// in month
 @property(nonatomic,assign,getter=isInMonth) BOOL inMonth;
 

@@ -44,12 +44,23 @@
     NSMutableArray<EMCalenderMonth *> * monthArr = [NSMutableArray arrayWithCapacity:monthCount + 2];
     // GCD 队列组
     dispatch_group_t group = dispatch_group_create();
+    // 信号量保证线程安全
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
+    // timeout
+    dispatch_time_t timeout = 2;
     // 加入队列组
     for (NSInteger i = 0; i < monthCount; i++) {
         dispatch_group_enter(group);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // load data
             [self synchronizeLoadDataForMonth:i+1 inYear:year completionHanlder:^(EMCalenderMonth *caldnderMonth) {
+                // 等待信号
+                dispatch_semaphore_wait(semaphore, timeout);
+                // 存储数据
                 [monthArr addObject:caldnderMonth];
+                // 信号 + 1
+                dispatch_semaphore_signal(semaphore);
+                // dispatch_group_leave
                 dispatch_group_leave(group);
             }];
         });
@@ -58,8 +69,15 @@
     // last year last month
     dispatch_group_enter(group);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // load data
         [self synchronizeLoadDataForMonth:12 inYear:year-1 completionHanlder:^(EMCalenderMonth *caldnderMonth) {
+            // 等待信号
+            dispatch_semaphore_wait(semaphore, timeout);
+            // 存储数据
             [monthArr addObject:caldnderMonth];
+            // 信号 + 1
+            dispatch_semaphore_signal(semaphore);
+            // dispatch_group_leave
             dispatch_group_leave(group);
         }];
     });
@@ -67,12 +85,20 @@
     // next year first month
     dispatch_group_enter(group);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // load data
         [self synchronizeLoadDataForMonth:1 inYear:year+1 completionHanlder:^(EMCalenderMonth *caldnderMonth) {
+            // 等待信号
+            dispatch_semaphore_wait(semaphore, timeout);
+            // 存储数据
             [monthArr addObject:caldnderMonth];
+            // 信号 + 1
+            dispatch_semaphore_signal(semaphore);
+            // dispatch_group_leave
             dispatch_group_leave(group);
         }];
     });
     
+    // completion notify
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // 排序
         [monthArr sortUsingComparator:^NSComparisonResult(EMCalenderMonth * obj1,EMCalenderMonth * obj2) {
@@ -90,9 +116,7 @@
 
 
 /// 获取月份数据(同步)
--(void)synchronizeLoadDataForMonth:(NSInteger) month
-                            inYear:(NSInteger) year
-                 completionHanlder:(void(^)(EMCalenderMonth * caldnderMonth)) completionHanlder {
+-(void)synchronizeLoadDataForMonth:(NSInteger) month inYear:(NSInteger) year completionHanlder:(void(^)(EMCalenderMonth * caldnderMonth)) completionHanlder {
     
     // length
     NSInteger length = 35;
@@ -151,7 +175,6 @@
         endDate = [_dateFormatter dateFromString:dateString];
     }
     
-    
     /// ------------------------ EventKit -------------------------------------------------------
     // 获取授权
     __weak typeof(self) weakSelf = self;
@@ -162,11 +185,8 @@
         }
         
         // 谓词
-        NSPredicate * predicate = [weakSelf.eventStore predicateForEventsWithStartDate:startDate
-                                                                               endDate:endDate
-                                                                             calendars:nil];
+        NSPredicate * predicate = [weakSelf.eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
         // 获取 EKEvent
-        
         NSArray<EKEvent*> * events = [weakSelf.eventStore eventsMatchingPredicate:predicate];
         
         // NSMutableArray<EMCalenderDay*>
@@ -175,8 +195,8 @@
             // date
             NSDate * date = [startDate dateByAddingTimeInterval:(60*60*24) * i];
             // date components
-            NSDateComponents * components = [weakSelf.calender components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay
-                                                                 fromDate:date];
+            NSInteger unitFlags = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
+            NSDateComponents * components = [weakSelf.calender components: unitFlags fromDate:date];
             // EMCalenderDay
             EMCalenderDay * calenderDay = [[EMCalenderDay alloc] init];
             // 赋值
@@ -193,6 +213,7 @@
                 if (result1 == NSOrderedSame  || result2 == NSOrderedSame || (result1 == NSOrderedAscending && result2 == NSOrderedDescending)) {
                     calenderDay.event = event;
                 }
+                
             }
             // 加入 array
             [dayArr addObject:calenderDay];
@@ -244,7 +265,8 @@
     // date
     NSDate * date = [NSDate date];
     // NSDateComponents
-    NSDateComponents * components = [_calender components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    NSInteger unitFlags = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday;
+    NSDateComponents * components = [_calender components:unitFlags fromDate:date];
     // EMCalenderDay
     EMCalenderDay * day = [[EMCalenderDay alloc] init];
     day.date = date;
@@ -252,6 +274,8 @@
     day.month = components.month;
     day.day = components.day;
     day.inMonth = NO;
+    day.weakDay = components.weekday - 1;
+    
     return day;
 }
 

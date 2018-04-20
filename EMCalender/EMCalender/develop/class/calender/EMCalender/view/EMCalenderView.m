@@ -250,6 +250,8 @@
     _currentYear = _calender.currentDay.year;
     // current month
     _currentMonth = _calender.currentDay.month;
+    // update weak
+    [self.calenderHeader selected:YES index:_calender.currentDay.weakDay];
     
     // load data
     __weak typeof(self) weakSelf = self;

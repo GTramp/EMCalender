@@ -54,6 +54,11 @@
 
 /// 设置选中状态
 -(void)selected:(BOOL)isSelected index:(NSInteger)index {
+    // clear selected
+    for (UIButton * button in _titleItems) {
+        button.selected = NO;
+    }
+
     UIButton * button = _titleItems[index];
     button.selected = isSelected;
 }
