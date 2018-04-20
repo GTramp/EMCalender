@@ -18,6 +18,7 @@
 #import "EMCalenderDetailView.h"
 #import "EMWeekDay.h"
 
+
 @interface EMCalenderView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 /// header view
@@ -67,6 +68,14 @@
 
 // MARK: - 自定义方法 -
 
+/// cancel selected state
+-(void)cancelSelectedItems:(CGPoint) loction {
+    NSArray<EMCalenderItem *> * arr = [self calenerItemInLocation:loction].lastObject;
+    for (EMCalenderItem * item in arr) {
+        item.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 /// calender change selected
 -(void)selectCalenderItems:(CGPoint) location {
     // array
@@ -90,13 +99,9 @@
         NSComparisonResult result1 = [item.day.date compare:start];
         NSComparisonResult result2 = [item.day.date compare:end];
         if (result1 == NSOrderedSame || result2 == NSOrderedSame || (result1 == NSOrderedDescending && result2 == NSOrderedAscending )) {
-            
-            item.markType = EMCalenderMarkTypeRemind;
-            
+            item.backgroundColor = [UIColor colorWithHex:@"#708090" alpha:0.9];
         } else {
-            
-            item.markType = EMCalenderMarkTypeNone;
-            
+            item.backgroundColor = [UIColor whiteColor];
         }
     }
 }
@@ -140,9 +145,11 @@
     } else if (state == UIGestureRecognizerStateChanged) {
         
         [self selectCalenderItems:touchPoint];
-        
+    
     } else {
         [self.calenderEditView show];
+        // cancel selected
+        [self cancelSelectedItems:touchPoint];
     }
 }
 

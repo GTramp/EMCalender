@@ -14,6 +14,7 @@
 #import <EventKit/EKEvent.h>
 #import <EventKit/EKCalendar.h>
 
+
 @interface EMCalenderDetailView ()
 
 /// content view
@@ -63,7 +64,7 @@
 /// show in location
 -(void)showInLocation:(CGPoint)location info:(id)information {
     // window
-    UIWindow * window = [UIApplication sharedApplication].windows.firstObject;
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
     // frame
     self.frame = window.frame;
     // add

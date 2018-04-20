@@ -82,7 +82,7 @@
 /// show
 -(void)show {
     // UIWindow
-    UIWindow * window = [UIApplication sharedApplication].windows.firstObject;
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
     // frame
     self.frame = window.frame;
     // add

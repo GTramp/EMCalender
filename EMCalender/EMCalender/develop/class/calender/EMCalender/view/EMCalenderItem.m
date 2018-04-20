@@ -12,6 +12,7 @@
 #import "EMCalenderDay.h"
 #import <EventKit/EventKit.h>
 
+
 @interface EMCalenderItem ()
 
 /// bottom border
@@ -36,6 +37,7 @@
     if (self = [super init]) {
         // 初始化Ui
         [self initUi];
+
     }
     return self;
 }
@@ -44,6 +46,7 @@
 
 /// 更新事件
 -(void)updateEvents:(NSArray<EKEvent *> *)events{
+    
     if (events) {
         _eventLabel.hidden = NO;
         
