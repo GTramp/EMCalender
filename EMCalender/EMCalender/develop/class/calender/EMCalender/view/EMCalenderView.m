@@ -16,6 +16,7 @@
 #import "EMCalenderItem.h"
 #import "EMCalenderEditView.h"
 #import "EMCalenderDetailView.h"
+#import "EMWeekDay.h"
 
 @interface EMCalenderView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -117,10 +118,13 @@
 -(void)calenderCollectionViewTapGestureHandler:(UITapGestureRecognizer *) gestureRecongnizer {
     // touch point
     CGPoint touchPoint = [gestureRecongnizer locationInView:_calenderCollection];
+    // EMCalenderItem
+    EMCalenderItem * item = [self calenerItemInLocation:touchPoint].firstObject;
     // cover point
     UIWindow * window = [UIApplication sharedApplication].windows.firstObject;
     touchPoint = [_calenderCollection convertPoint:touchPoint toView:window];
-    [self.calenderDetailView showInLocation:touchPoint info:nil];
+    // show
+    [self.calenderDetailView showInLocation:touchPoint info:item.day];
 }
 
 /// colllection view longPressGesture
@@ -251,7 +255,7 @@
     // current month
     _currentMonth = _calender.currentDay.month;
     // update weak
-    [self.calenderHeader selected:YES index:_calender.currentDay.weakDay];
+    [self.calenderHeader selected:YES index:_calender.currentDay.weakDay.index];
     
     // load data
     __weak typeof(self) weakSelf = self;

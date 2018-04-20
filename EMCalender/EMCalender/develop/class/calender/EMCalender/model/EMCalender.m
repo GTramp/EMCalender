@@ -10,6 +10,7 @@
 #import "EMCalenderMonth.h"
 #import "EMCalenderDay.h"
 #import <EventKit/EventKit.h>
+#import "EMWeekDay.h"
 
 @interface EMCalender ()
 
@@ -48,8 +49,9 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
     // timeout
     dispatch_time_t timeout = 2;
-    // 加入队列组
+    
     for (NSInteger i = 0; i < monthCount; i++) {
+        // 加入队列组
         dispatch_group_enter(group);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // load data
@@ -60,13 +62,15 @@
                 [monthArr addObject:caldnderMonth];
                 // 信号 + 1
                 dispatch_semaphore_signal(semaphore);
-                // dispatch_group_leave
+                // 从队列组移除
                 dispatch_group_leave(group);
             }];
         });
     }
     
     // last year last month
+    
+    // 加入队列组
     dispatch_group_enter(group);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // load data
@@ -77,12 +81,13 @@
             [monthArr addObject:caldnderMonth];
             // 信号 + 1
             dispatch_semaphore_signal(semaphore);
-            // dispatch_group_leave
+            // 从队列组移除
             dispatch_group_leave(group);
         }];
     });
     
     // next year first month
+    // 加入队列组
     dispatch_group_enter(group);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // load data
@@ -93,14 +98,14 @@
             [monthArr addObject:caldnderMonth];
             // 信号 + 1
             dispatch_semaphore_signal(semaphore);
-            // dispatch_group_leave
+            // 从队列组移除
             dispatch_group_leave(group);
         }];
     });
     
     // completion notify
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // 排序
+        // sort
         [monthArr sortUsingComparator:^NSComparisonResult(EMCalenderMonth * obj1,EMCalenderMonth * obj2) {
             return [obj1.date compare:obj2.date];
         }];
@@ -131,7 +136,7 @@
         if (month == 1) {
             // 上个月的dayCount
             NSInteger lastDayCount = [self numberOfMonth:12 inYear:year-1];
-            // start date
+            // start datei
             NSString * dateString = [NSString stringWithFormat:@"%ld-12-%02ld 00:00:00",year-1, lastDayCount - first + 1];
             startDate = [_dateFormatter dateFromString:dateString];
         } else {
@@ -204,16 +209,18 @@
             calenderDay.year = components.year;
             calenderDay.month = components.month;
             calenderDay.day = components.day;
+            calenderDay.weakDay = [weakSelf transformWeekDay:date];
             components.month == month ? (calenderDay.inMonth = YES) : (calenderDay.inMonth = NO);
             
             // EKEvent
+            NSMutableArray<EKEvent *> * eventArr = [NSMutableArray array];
             for (EKEvent * event in events) {
                 NSComparisonResult result1 = [event.startDate compare:date];
                 NSComparisonResult result2 = [event.endDate compare:date];
                 if (result1 == NSOrderedSame  || result2 == NSOrderedSame || (result1 == NSOrderedAscending && result2 == NSOrderedDescending)) {
-                    calenderDay.event = event;
+                    [eventArr addObject:event];
                 }
-                
+                calenderDay.events = eventArr.copy;
             }
             // 加入 array
             [dayArr addObject:calenderDay];
@@ -236,6 +243,54 @@
     }];
 }
 
+/// 根据日期获取星期几
+-(EMWeekDay *)transformWeekDay:(NSDate *)date {
+    EMWeekDay * _weekDay = [[EMWeekDay alloc] init];
+    NSInteger weekDay = [_calender ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitWeekOfMonth forDate:date] -1;
+    
+    switch (weekDay) {
+        case 0:
+            _weekDay.zh = @"星期日";
+            _weekDay.en = @"Sunday";
+            _weekDay.index = 0;
+            break;
+        case 1:
+            _weekDay.zh = @"星期一";
+            _weekDay.en = @"Monday";
+            _weekDay.index = 1;
+            break;
+        case 2:
+            _weekDay.zh = @"星期二";
+            _weekDay.en = @"Tuesday";
+            _weekDay.index = 2;
+            break;
+        case 3:
+            _weekDay.zh = @"星期三";
+            _weekDay.en = @"Wednesday";
+            _weekDay.index = 3;
+            break;
+        case 4:
+            _weekDay.zh = @"星期四";
+            _weekDay.en = @"Thursday";
+            _weekDay.index = 4;
+            break;
+        case 5:
+            _weekDay.zh = @"星期五";
+            _weekDay.en = @"Friday";
+            _weekDay.index = 5;
+            break;
+        case 6:
+            _weekDay.zh = @"星期六";
+            _weekDay.en = @"Saturday";
+            _weekDay.index = 6;
+            break;
+            
+        default:
+            _weekDay = nil;
+            break;
+    }
+    return _weekDay;
+}
 
 /// 获取每月的第一天为周几 0. Sunday 1. Monday 2. Tuesday 3. Wednesday 4. Thursday 5. Friday 6. Saturday
 -(NSInteger)firstWeekDayOfMonth:(NSInteger) month inYear:(NSInteger) year {
@@ -274,7 +329,7 @@
     day.month = components.month;
     day.day = components.day;
     day.inMonth = NO;
-    day.weakDay = components.weekday - 1;
+    day.weakDay = [self transformWeekDay:date];
     
     return day;
 }

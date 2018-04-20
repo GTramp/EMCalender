@@ -43,12 +43,17 @@
 // MARK: - 自定义方法 -
 
 /// 更新事件
--(void)updateEvent:(EKEvent *)event {
-    if (event) {
+-(void)updateEvents:(NSArray<EKEvent *> *)events{
+    if (events) {
         _eventLabel.hidden = NO;
-        _eventLabel.backgroundColor = [UIColor colorWithCGColor: event.calendar.CGColor];
         
-        _eventLabel.text = event.title;
+        NSMutableAttributedString * mutAtt = [[NSMutableAttributedString alloc] init];
+        for (EKEvent * event in events) {
+            NSAttributedString * att = [[NSAttributedString alloc] initWithString:event.title
+                                                                       attributes:@{NSBackgroundColorAttributeName: [UIColor colorWithCGColor:event.calendar.CGColor]}];
+            [mutAtt appendAttributedString:att];
+        }
+        _eventLabel.attributedText = mutAtt;
         
     } else {
         _eventLabel.hidden = YES;
@@ -69,7 +74,7 @@
     _dateLabel.text = [NSString stringWithFormat:@"%ld-%02ld",day.year,day.month];
     
     // 更新事件
-    [self updateEvent:day.event];
+    [self updateEvents:day.events];
 }
 
 -(void)setBorderColor:(UIColor *)borderColor {
@@ -146,7 +151,6 @@
 -(UILabel *)eventLabel {
     if (!_eventLabel) {
         _eventLabel = [[UILabel alloc] init];
-        _eventLabel.backgroundColor = [UIColor colorWithHex:@"#40E0D0"];
         _eventLabel.hidden = YES;
     }
     return _eventLabel;

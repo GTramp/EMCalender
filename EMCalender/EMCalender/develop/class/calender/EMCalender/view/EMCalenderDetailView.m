@@ -9,6 +9,10 @@
 #import "EMCalenderDetailView.h"
 #import "UIColor+Extension.h"
 #import <Masonry.h>
+#import "EMCalenderDay.h"
+#import "EMWeekDay.h"
+#import <EventKit/EKEvent.h>
+#import <EventKit/EKCalendar.h>
 
 @interface EMCalenderDetailView ()
 
@@ -18,6 +22,15 @@
 @property(nonatomic,strong) UIView * detailView;
 /// contact button
 @property(nonatomic,strong) UIButton * contactButton;
+
+/// title label
+@property(nonatomic,strong) UILabel * titleLabel;
+/// add button
+@property(nonatomic,strong) UIButton * addButton;
+/// partLine
+@property(nonatomic,strong) UIView * partLine;
+/// event label
+@property(nonatomic,strong) UILabel * eventLabel;
 
 @end
 
@@ -39,6 +52,14 @@
 }
 
 // MARK: - 自定义方法 -
+
+/// add button action handler
+-(void)addButtonActionHandler:(UIButton *) sender {
+    if ([_delegate respondsToSelector:@selector(detailView:addButtonActionHandler:)]) {
+        [_delegate detailView:self addButtonActionHandler:sender];
+    }
+}
+
 /// show in location
 -(void)showInLocation:(CGPoint)location info:(id)information {
     // window
@@ -70,6 +91,27 @@
     animationGroup.repeatCount = 1;
     animationGroup.animations = @[positionAnimation,scaleAniamtion];
     [_contentView.layer addAnimation:animationGroup forKey:nil];
+    
+    // update data
+    if ([information isKindOfClass:[EMCalenderDay class]]) {
+        EMCalenderDay * info = (EMCalenderDay *)information;
+        // title
+        _titleLabel.text = [NSString stringWithFormat:@"%ld-%ld %@", info.month, info.day, info.weakDay.zh];
+        
+        // event
+        if (info.events) {
+            _eventLabel.hidden = NO;
+            NSMutableAttributedString * mutAtt = [[NSMutableAttributedString alloc] init];
+            for (EKEvent * event in info.events) {
+                NSAttributedString * att = [[NSAttributedString alloc] initWithString:event.title
+                                                                           attributes:@{NSBackgroundColorAttributeName: [UIColor colorWithCGColor:event.calendar.CGColor]}];
+                [mutAtt appendAttributedString:att];
+            }
+            _eventLabel.attributedText = mutAtt;
+        } else {
+            _eventLabel.hidden = YES;
+        }
+    }
 }
 
 /// dismiss
@@ -106,9 +148,76 @@
         make.height.mas_equalTo(64.f);
     }];
     
+    // partline
+    [_contentView addSubview:self.partLine];
+    [_partLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.contentView).offset(64.f);
+        make.left.right.mas_equalTo(self.contentView);
+        make.height.mas_equalTo(0.5f);
+    }];
+    
+    // title view
+    [_contentView addSubview:self.titleLabel];
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.contentView);
+        make.top.mas_equalTo(self.contentView);
+        make.bottom.mas_equalTo(self.partLine);
+    }];
+    
+    // add button
+    [_contentView addSubview: self.addButton];
+    [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.titleLabel);
+        make.right.mas_equalTo(self.contentView).offset(-16.f);
+    }];
+    
+    // event label
+    [_contentView addSubview:self.eventLabel];
+    [_eventLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.contentView);
+        make.top.mas_equalTo(self.partLine.mas_bottom).offset(16.f);
+        make.height.mas_equalTo(32.f);
+    }];
 }
 
 // MARK: - 懒加载 -
+
+/// event label
+-(UILabel *)eventLabel {
+    if (!_eventLabel) {
+        _eventLabel = [[UILabel alloc] init];
+        _eventLabel.hidden = YES;
+    }
+    return _eventLabel;
+}
+
+/// part line
+-(UIView *)partLine {
+    if (!_partLine) {
+        _partLine = [[UIView alloc] init];
+        _partLine.backgroundColor = [UIColor colorWithHex:@"#808080"];
+    }
+    return _partLine;
+}
+
+/// addbutton
+-(UIButton *)addButton {
+    if (!_addButton) {
+        _addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [_addButton addTarget:self action:@selector(addButtonActionHandler:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _addButton;
+}
+
+/// title label
+-(UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = [UIFont systemFontOfSize:16.f];
+        _titleLabel.textColor = [UIColor blackColor];
+    }
+    return _titleLabel;
+}
 
 /// contact button
 -(UIButton *)contactButton {

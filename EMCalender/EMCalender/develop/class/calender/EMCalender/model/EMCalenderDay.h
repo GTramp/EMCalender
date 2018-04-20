@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class EKEvent;
+@class EKEvent,EMWeekDay;
 @interface EMCalenderDay : NSObject
 
 /// NSDate
@@ -20,11 +20,11 @@
 /// day
 @property(nonatomic,assign) NSInteger day;
 /// week day
-@property(nonatomic,assign) NSInteger weakDay;
+@property(nonatomic,strong) EMWeekDay * weakDay;
 /// in month
 @property(nonatomic,assign,getter=isInMonth) BOOL inMonth;
 
 /// EKEvent
-@property(nonatomic,strong) EKEvent * event;
+@property(nonatomic,strong) NSArray<EKEvent *> * events;
 
 @end

@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class EMCalenderDetailView;
+@protocol EMCalenderDetailViewDelegate<NSObject>
+@optional
+-(void)detailView:(EMCalenderDetailView *)detailView addButtonActionHandler:(UIButton *) addButton;
+
+@end
+
 @interface EMCalenderDetailView : UIView
 
+/// delegate
+@property(nonatomic,weak) id<EMCalenderDetailViewDelegate> delegate;
 
 /**
  展示
