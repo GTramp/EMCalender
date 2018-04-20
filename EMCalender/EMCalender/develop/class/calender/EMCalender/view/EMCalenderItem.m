@@ -37,7 +37,7 @@
     if (self = [super init]) {
         // 初始化Ui
         [self initUi];
-
+        
     }
     return self;
 }
@@ -52,8 +52,8 @@
         
         NSMutableAttributedString * mutAtt = [[NSMutableAttributedString alloc] init];
         for (EKEvent * event in events) {
-            NSAttributedString * att = [[NSAttributedString alloc] initWithString:event.title
-                                                                       attributes:@{NSBackgroundColorAttributeName: [UIColor colorWithCGColor:event.calendar.CGColor]}];
+            NSDictionary * attributes = @{NSBackgroundColorAttributeName: [UIColor colorWithCGColor:event.calendar.CGColor]};
+            NSAttributedString * att = [[NSAttributedString alloc] initWithString:event.title attributes: attributes];
             [mutAtt appendAttributedString:att];
         }
         _eventLabel.attributedText = mutAtt;
@@ -71,11 +71,9 @@
     // number label
     _numberLabel.text = [NSString stringWithFormat:@"%ld",day.day];
     // text color
-    day.isInMonth ? (_numberLabel.backgroundColor = [UIColor colorWithHex:@"#FA8072"]) : (_numberLabel.backgroundColor = [UIColor colorWithHex:@"#C0C0C0"]);
-    
+     _numberLabel.backgroundColor = day.isInMonth ? [UIColor colorWithHex:@"#FA8072"] : [UIColor colorWithHex:@"#C0C0C0"];
     // date label
     _dateLabel.text = [NSString stringWithFormat:@"%ld-%02ld",day.year,day.month];
-    
     // 更新事件
     [self updateEvents:day.events];
 }

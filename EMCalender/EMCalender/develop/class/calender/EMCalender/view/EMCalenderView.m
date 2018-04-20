@@ -145,7 +145,7 @@
     } else if (state == UIGestureRecognizerStateChanged) {
         
         [self selectCalenderItems:touchPoint];
-    
+        
     } else {
         [self.calenderEditView show];
         // cancel selected
@@ -181,13 +181,9 @@
             // 刷新数据
             weakSelf.dataArray = array;
             [weakSelf.calenderCollection reloadData];
-            
             // 滚动到指定位置
-            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:weakSelf.currentMonth
-                                                          inSection:0];
-            [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath
-                                                atScrollPosition:UICollectionViewScrollPositionNone
-                                                        animated:NO];
+            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:weakSelf.currentMonth inSection:0];
+            [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
         }];
         
     } else if (index == 0) { // 滑动到了最左端
@@ -202,13 +198,9 @@
             // 刷新数据
             weakSelf.dataArray = array;
             [weakSelf.calenderCollection reloadData];
-            
             // 滚动到指定位置
-            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:weakSelf.currentMonth
-                                                          inSection:0];
-            [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath
-                                                atScrollPosition:UICollectionViewScrollPositionNone
-                                                        animated:NO];
+            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:weakSelf.currentMonth inSection:0];
+            [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
         }];
         
     } else { // 1 - 12
@@ -220,8 +212,9 @@
 // MARK: - UIScrollViewDelegate -
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width  + 0.5;
     
+    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width  + 0.5;
+
     if (index != 0 && index != 13) {
         [self invokeDelegateChange:_currentYear month:index];
     }
@@ -240,8 +233,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     // 获取cell
-    EMCalenderCell * cell = (EMCalenderCell *) [collectionView dequeueReusableCellWithReuseIdentifier:EM_CALENDER_CELL_ID
-                                                                                         forIndexPath:indexPath];
+    EMCalenderCell * cell = (EMCalenderCell *) [collectionView dequeueReusableCellWithReuseIdentifier:EM_CALENDER_CELL_ID forIndexPath:indexPath];
     // cell 背景色
     cell.backgroundColor = [UIColor randomColor];
     // 设置数据
@@ -249,7 +241,6 @@
     // 返回
     return cell;
 }
-
 
 // MARK: - 初始化 -
 
@@ -271,14 +262,10 @@
         weakSelf.dataArray = array;
         [weakSelf.calenderCollection reloadData];
         // 滚动到指定位置
-        NSIndexPath * indexPath = [NSIndexPath indexPathForItem:weakSelf.currentMonth
-                                                      inSection:0];
-        [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath
-                                            atScrollPosition:UICollectionViewScrollPositionNone
-                                                    animated:NO];
+        NSIndexPath * indexPath = [NSIndexPath indexPathForItem:weakSelf.currentMonth inSection:0];
+        [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
         // invoke delegate
-        [weakSelf invokeDelegateChange:weakSelf.currentYear
-                                 month:weakSelf.currentMonth];
+        [weakSelf invokeDelegateChange:weakSelf.currentYear month:weakSelf.currentMonth];
     }];
 }
 
@@ -335,8 +322,7 @@
 /// calender collection
 -(UICollectionView *)calenderCollection {
     if (!_calenderCollection) {
-        _calenderCollection = [[UICollectionView alloc] initWithFrame:CGRectZero
-                                                 collectionViewLayout:self.flowLayout];
+        _calenderCollection = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
         // 预设
         _calenderCollection.delegate = self;
         _calenderCollection.dataSource = self;

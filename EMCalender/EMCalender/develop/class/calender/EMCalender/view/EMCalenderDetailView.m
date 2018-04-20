@@ -104,8 +104,8 @@
             _eventLabel.hidden = NO;
             NSMutableAttributedString * mutAtt = [[NSMutableAttributedString alloc] init];
             for (EKEvent * event in info.events) {
-                NSAttributedString * att = [[NSAttributedString alloc] initWithString:event.title
-                                                                           attributes:@{NSBackgroundColorAttributeName: [UIColor colorWithCGColor:event.calendar.CGColor]}];
+                NSDictionary * attributes = @{NSBackgroundColorAttributeName: [UIColor colorWithCGColor:event.calendar.CGColor]};
+                NSAttributedString * att = [[NSAttributedString alloc] initWithString:event.title attributes: attributes];
                 [mutAtt appendAttributedString:att];
             }
             _eventLabel.attributedText = mutAtt;

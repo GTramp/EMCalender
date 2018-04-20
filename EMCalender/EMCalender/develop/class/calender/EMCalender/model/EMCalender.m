@@ -210,7 +210,7 @@
             calenderDay.month = components.month;
             calenderDay.day = components.day;
             calenderDay.weakDay = [weakSelf transformWeekDay:date];
-            components.month == month ? (calenderDay.inMonth = YES) : (calenderDay.inMonth = NO);
+            calenderDay.inMonth = components.month == month ?  YES : NO;
             
             // EKEvent
             NSMutableArray<EKEvent *> * eventArr = [NSMutableArray array];

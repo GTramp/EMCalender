@@ -31,7 +31,6 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    
     // 设置 frame
     [self initCalenderItemFrames:_calenderItems];
 }

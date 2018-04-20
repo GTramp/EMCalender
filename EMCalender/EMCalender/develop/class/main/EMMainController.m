@@ -41,8 +41,8 @@
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.textColor = [UIColor redColor];
-        _tipLabel.font = [UIFont systemFontOfSize:84.f];
-        _tipLabel.text = @"tap";
+        _tipLabel.font = [UIFont systemFontOfSize:120.f];
+        _tipLabel.text = @"Touch";
     }
     return _tipLabel;
 }

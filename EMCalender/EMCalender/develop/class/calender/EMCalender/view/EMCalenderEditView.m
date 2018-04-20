@@ -208,8 +208,7 @@
         _taskView.backgroundColor = [UIColor whiteColor];
         
         // UISwipeGestureRecognizer
-        UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(swipeGestureHandler:)];
+        UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureHandler:)];
         swipe.direction = UISwipeGestureRecognizerDirectionRight;
         [_taskView addGestureRecognizer:swipe];
     }
@@ -223,8 +222,7 @@
         _scheduleView.backgroundColor = [UIColor whiteColor];
         
         // UISwipeGestureRecognizer
-        UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(swipeGestureHandler:)];
+        UISwipeGestureRecognizer * swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureHandler:)];
         swipe.direction = UISwipeGestureRecognizerDirectionLeft;
         [_scheduleView addGestureRecognizer:swipe];
     }
