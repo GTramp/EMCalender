@@ -18,6 +18,9 @@
 @property(nonatomic,strong) UIButton * sureButton;
 /// schedule view
 @property(nonatomic,strong) UIView * scheduleView;
+/// schedule date range label
+@property(nonatomic,strong) UILabel * scheduleDateLabel;
+
 /// task view
 @property(nonatomic,strong) UIView * taskView;
 /// sort button
@@ -48,6 +51,22 @@
 }
 
 // MARK: - 自定义方法 -
+
+/// 展示编辑视图
+-(void)showWidthStartDate:(NSDate *) start endDate:(NSDate *) endDate {
+    if ([start compare:endDate] == NSOrderedDescending) {
+        NSDate * temp = endDate;
+        endDate = start;
+        start = temp;
+    }
+    
+    // date
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    _scheduleDateLabel.text = [NSString stringWithFormat:@"%@ -- %@",[dateFormatter stringFromDate:start], [dateFormatter stringFromDate:endDate]];
+    
+    [self show];
+}
 
 /// show sort view
 -(void)showSortView {
@@ -119,6 +138,11 @@
         make.left.mas_equalTo(self).offset(32.f);
         make.right.mas_equalTo(self).offset(-32.f);
         make.height.mas_equalTo(120.f);
+    }];
+    
+    [_scheduleView addSubview:self.scheduleDateLabel];
+    [_scheduleDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.top.mas_equalTo(self.scheduleView);
     }];
     
     // task view
@@ -213,6 +237,15 @@
         [_taskView addGestureRecognizer:swipe];
     }
     return _taskView;
+}
+
+/// date label
+-(UILabel *)scheduleDateLabel {
+    if (!_scheduleDateLabel) {
+        _scheduleDateLabel = [[UILabel alloc] init];
+        _scheduleDateLabel.textColor = [UIColor blackColor];
+    }
+    return _scheduleDateLabel;
 }
 
 /// schedule

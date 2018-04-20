@@ -10,10 +10,11 @@
 
 @interface EMCalenderEditView : UIView
 
+-(void)showWidthStartDate:(NSDate *) start endDate:(NSDate *) endDate;
 /**
  show
  */
--(void)show;
+//-(void)show;
 
 /**
  dismiss

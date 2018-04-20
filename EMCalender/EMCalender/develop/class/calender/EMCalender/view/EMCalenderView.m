@@ -147,7 +147,8 @@
         [self selectCalenderItems:touchPoint];
         
     } else {
-        [self.calenderEditView show];
+        [self.calenderEditView showWidthStartDate:_firstCalenderItem.day.date
+                                          endDate:_lastCalenderItem.day.date];
         // cancel selected
         [self cancelSelectedItems:touchPoint];
     }
