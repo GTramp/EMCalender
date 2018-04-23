@@ -10,10 +10,10 @@
 		C74696DB2088851200C7EF8C /* EMMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74696DA2088851200C7EF8C /* EMMainController.m */; };
 		C77345A420897AFB00D80F76 /* EMWeekDay.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A320897AFB00D80F76 /* EMWeekDay.m */; };
 		C77345A72089882000D80F76 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A62089882000D80F76 /* UIView+Extension.m */; };
+		C7BD2DD4208D76520095CC6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7BD2DD3208D76520095CC6A /* Assets.xcassets */; };
 		C7F34ABB2087622B00239101 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ABA2087622B00239101 /* AppDelegate.m */; };
 		C7F34ABE2087622B00239101 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ABD2087622B00239101 /* ViewController.m */; };
 		C7F34AC12087622B00239101 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F34ABF2087622B00239101 /* Main.storyboard */; };
-		C7F34AC32087622C00239101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F34AC22087622C00239101 /* Assets.xcassets */; };
 		C7F34AC62087622C00239101 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F34AC42087622C00239101 /* LaunchScreen.storyboard */; };
 		C7F34AC92087622C00239101 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AC82087622C00239101 /* main.m */; };
 		C7F34AF0208762AB00239101 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AD3208762AB00239101 /* UIColor+Extension.m */; };
@@ -40,13 +40,13 @@
 		C77345A320897AFB00D80F76 /* EMWeekDay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMWeekDay.m; sourceTree = "<group>"; };
 		C77345A52089882000D80F76 /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		C77345A62089882000D80F76 /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		C7BD2DD3208D76520095CC6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7F34AB62087622B00239101 /* EMCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F34AB92087622B00239101 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C7F34ABA2087622B00239101 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C7F34ABC2087622B00239101 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C7F34ABD2087622B00239101 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C7F34AC02087622B00239101 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C7F34AC22087622C00239101 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7F34AC52087622C00239101 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7F34AC72087622C00239101 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7F34AC82087622C00239101 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,8 +147,8 @@
 				C7F34ABC2087622B00239101 /* ViewController.h */,
 				C7F34ABD2087622B00239101 /* ViewController.m */,
 				C7F34ABF2087622B00239101 /* Main.storyboard */,
-				C7F34AC22087622C00239101 /* Assets.xcassets */,
 				C7F34AC42087622C00239101 /* LaunchScreen.storyboard */,
+				C7BD2DD3208D76520095CC6A /* Assets.xcassets */,
 				C7F34AC72087622C00239101 /* Info.plist */,
 				C7F34AC82087622C00239101 /* main.m */,
 			);
@@ -316,7 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7F34AC62087622C00239101 /* LaunchScreen.storyboard in Resources */,
-				C7F34AC32087622C00239101 /* Assets.xcassets in Resources */,
+				C7BD2DD4208D76520095CC6A /* Assets.xcassets in Resources */,
 				C7F34AC12087622B00239101 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,6 +538,7 @@
 			baseConfigurationReference = ECD8674F7AEBE335EB32744B /* Pods-EMCalender.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6W77EGW7S3;
 				INFOPLIST_FILE = EMCalender/Info.plist;
@@ -546,8 +547,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.EMCalender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.calender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -557,6 +559,7 @@
 			baseConfigurationReference = ADC98FDB66600B3BDD7C732A /* Pods-EMCalender.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6W77EGW7S3;
 				INFOPLIST_FILE = EMCalender/Info.plist;
@@ -565,8 +568,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.EMCalender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.calender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
