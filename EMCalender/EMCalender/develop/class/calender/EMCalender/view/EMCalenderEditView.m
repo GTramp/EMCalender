@@ -9,6 +9,7 @@
 #import "EMCalenderEditView.h"
 #import "UIColor+Extension.h"
 #import <Masonry.h>
+#import "EMEvent.h"
 
 @interface EMCalenderEditView ()<UIScrollViewDelegate>
 
@@ -20,6 +21,10 @@
 @property(nonatomic,strong) UIView * scheduleView;
 /// schedule date range label
 @property(nonatomic,strong) UILabel * scheduleDateLabel;
+/// schedule imageView
+@property(nonatomic,strong) UIImageView * scheduleImageView;
+/// schedule textFiled;
+@property(nonatomic,strong) UITextField * scheduleTextFiled;
 
 /// task view
 @property(nonatomic,strong) UIView * taskView;
@@ -51,6 +56,22 @@
 }
 
 // MARK: - 自定义方法 -
+
+/// commit event action
+-(void)commitAction:(UIButton * )sender {
+    if (!_scheduleTextFiled.text.length) {
+        return;
+    }
+    
+    if (_scheduleTextFiled.isFirstResponder && [_delegate respondsToSelector:@selector(calenderEditView:commitAction:eidtType:)]) {
+        EMEvent * event = [[EMEvent alloc] init];
+        event.title = _scheduleTextFiled.text;
+        event.start = @"2018-04-20 12:00:00";
+        event.end = @"2018-05-10 12:00:00";
+        event.allDay = YES;
+        [_delegate calenderEditView:self commitAction:event eidtType:EM_CALENDER_EDIT_TYPE_SCHEDULE];
+    }
+}
 
 /// 展示编辑视图
 -(void)showWidthStartDate:(NSDate *) start endDate:(NSDate *) endDate {
@@ -145,6 +166,28 @@
         make.centerX.top.mas_equalTo(self.scheduleView);
     }];
     
+    // schedule image view
+    [_scheduleView addSubview:self.scheduleImageView];
+    [_scheduleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.scheduleView).offset(8.f);
+        make.centerY.mas_equalTo(self.scheduleView);
+        make.width.height.mas_equalTo(24.f);
+    }];
+    
+    // sort button
+    [_scheduleView addSubview:self.sortButton];
+    [_sortButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_equalTo(self.scheduleView).offset(-16.f);
+    }];
+    
+    // schedule textFiled
+    [_scheduleView addSubview:self.scheduleTextFiled];
+    [_scheduleTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.scheduleImageView).offset(3.f);
+        make.left.mas_equalTo(self.scheduleImageView.mas_right).offset(6.f);
+        make.right.mas_equalTo(self.sortButton.mas_left);
+    }];
+    
     // task view
     [self addSubview:self.taskView];
     [_taskView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -168,11 +211,6 @@
         make.right.mas_equalTo(self.scheduleView);
     }];
     
-    // sort button
-    [_scheduleView addSubview:self.sortButton];
-    [_sortButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.bottom.mas_equalTo(self.scheduleView).offset(-16.f);
-    }];
     
     /// sort view
     [self addSubview:self.sortView];
@@ -184,6 +222,23 @@
 }
 
 // MARK: - 懒加载 -
+
+/// schedule textFiled
+-(UITextField *)scheduleTextFiled {
+    if (!_scheduleTextFiled) {
+        _scheduleTextFiled = [[UITextField alloc] init];
+        _scheduleTextFiled.placeholder = @"日程主题";
+    }
+    return _scheduleTextFiled;
+}
+
+/// schedule imageview
+-(UIImageView *)scheduleImageView {
+    if (!_scheduleImageView) {
+        _scheduleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"em_calender_checkmark"]];
+    }
+    return _scheduleImageView;
+}
 
 /// sort view
 -(UIView *)sortView {
@@ -210,6 +265,7 @@
         _sureButton.backgroundColor = [UIColor whiteColor];
         [_sureButton setTitle:@"确认" forState:UIControlStateNormal];
         [_sureButton setTitleColor:[UIColor colorWithHex:@"#696969"] forState:UIControlStateNormal];
+        [_sureButton addTarget:self action:@selector(commitAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureButton;
 }

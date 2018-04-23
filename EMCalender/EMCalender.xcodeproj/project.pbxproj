@@ -17,6 +17,7 @@
 		C745E65D208DC97900727E27 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A62089882000D80F76 /* UIView+Extension.m */; };
 		C745E660208DCA7800727E27 /* EMCalenderEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E65F208DCA7800727E27 /* EMCalenderEditController.m */; };
 		C745E663208DCB1500727E27 /* EMCalenderCreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E662208DCB1500727E27 /* EMCalenderCreateController.m */; };
+		C745E666208DD89800727E27 /* EMEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E665208DD89800727E27 /* EMEvent.m */; };
 		C74696DB2088851200C7EF8C /* EMMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74696DA2088851200C7EF8C /* EMMainController.m */; };
 		C77345A420897AFB00D80F76 /* EMWeekDay.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A320897AFB00D80F76 /* EMWeekDay.m */; };
 		C77345A72089882000D80F76 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A62089882000D80F76 /* UIView+Extension.m */; };
@@ -88,6 +89,8 @@
 		C745E65F208DCA7800727E27 /* EMCalenderEditController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMCalenderEditController.m; sourceTree = "<group>"; };
 		C745E661208DCB1500727E27 /* EMCalenderCreateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMCalenderCreateController.h; sourceTree = "<group>"; };
 		C745E662208DCB1500727E27 /* EMCalenderCreateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMCalenderCreateController.m; sourceTree = "<group>"; };
+		C745E664208DD89800727E27 /* EMEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMEvent.h; sourceTree = "<group>"; };
+		C745E665208DD89800727E27 /* EMEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMEvent.m; sourceTree = "<group>"; };
 		C74696D92088851200C7EF8C /* EMMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMMainController.h; sourceTree = "<group>"; };
 		C74696DA2088851200C7EF8C /* EMMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMMainController.m; sourceTree = "<group>"; };
 		C77345A220897AFB00D80F76 /* EMWeekDay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMWeekDay.h; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				C7F34ADE208762AB00239101 /* EMIndexPath.m */,
 				C77345A220897AFB00D80F76 /* EMWeekDay.h */,
 				C77345A320897AFB00D80F76 /* EMWeekDay.m */,
+				C745E664208DD89800727E27 /* EMEvent.h */,
+				C745E665208DD89800727E27 /* EMEvent.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -604,6 +609,7 @@
 				C7F34ABB2087622B00239101 /* AppDelegate.m in Sources */,
 				C7F34AF3208762AB00239101 /* EMIndexPath.m in Sources */,
 				C7F34AF5208762AB00239101 /* EMCalenderDetailView.m in Sources */,
+				C745E666208DD89800727E27 /* EMEvent.m in Sources */,
 				C745E64A208D969000727E27 /* NSString+Extension.m in Sources */,
 				C7F34AF0208762AB00239101 /* UIColor+Extension.m in Sources */,
 				C745E660208DCA7800727E27 /* EMCalenderEditController.m in Sources */,

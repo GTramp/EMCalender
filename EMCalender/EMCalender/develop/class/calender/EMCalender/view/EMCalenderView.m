@@ -17,9 +17,10 @@
 #import "EMCalenderEditView.h"
 #import "EMCalenderDetailView.h"
 #import "EMWeekDay.h"
+#import "EMEvent.h"
 
 
-@interface EMCalenderView ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface EMCalenderView ()<UICollectionViewDataSource,UICollectionViewDelegate,EMCalenderEditViewDelegate>
 
 /// header view
 @property(nonatomic,strong) EMCalenderHeader * calenderHeader;
@@ -210,6 +211,14 @@
     }
 }
 
+// MARK: - EMCalenderEditViewDelegate -
+-(void)calenderEditView:(EMCalenderEditView *)editView commitAction:(EMEvent *)event eidtType:(EM_CALENDER_EDIT_TYPE)eidtType {
+    // save
+    [_calender saveEvent:event completionHandler:^(BOOL isSucceed) {
+        isSucceed ? NSLog(@"success") : NSLog(@"failure");
+    }];
+}
+
 // MARK: - UIScrollViewDelegate -
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -305,6 +314,7 @@
 -(EMCalenderEditView *)calenderEditView {
     if (!_calenderEditView) {
         _calenderEditView = [[EMCalenderEditView alloc] init];
+        _calenderEditView.delegate = self;
     }
     return _calenderEditView;
 }

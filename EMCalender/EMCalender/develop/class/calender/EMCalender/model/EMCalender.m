@@ -11,6 +11,7 @@
 #import "EMCalenderDay.h"
 #import <EventKit/EventKit.h>
 #import "EMWeekDay.h"
+#import "EMEvent.h"
 
 @interface EMCalender ()
 
@@ -35,6 +36,58 @@
 }
 
 // MARK: - 自定义方法 -
+
+/// 保存
+-(void)saveEvent:(EMEvent *)event completionHandler:(void (^)(BOOL))completionHandler {
+    // EKEvent
+    EKEvent * _event = [EKEvent eventWithEventStore:_eventStore];
+    // set calender
+    [_event setCalendar:[_eventStore defaultCalendarForNewEvents]];
+    // alarms
+    if (event.alarms) {
+        [_event setAlarms:event.alarms];
+    }
+    // title
+    if (event.title) {
+        [_event setTitle:event.title];
+    }
+    // location
+    if (event.location) {
+        [_event setLocation:event.location];
+    }
+    // all day
+    [_event setAllDay:event.allDay];
+    
+    if (event.start) {
+        _event.startDate = [_dateFormatter dateFromString:event.start];
+    }
+    
+    if (event.end) {
+        _event.endDate = [_dateFormatter dateFromString:event.end];
+    }
+    
+    // 获取授权
+    __weak typeof(self) weakSelf = self;
+    [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
+        if (!granted) {
+            NSLog(@"%@",error);
+            return ;
+        }
+        
+        NSError * erro;
+        BOOL isReuslt = [weakSelf.eventStore saveEvent:_event span:EKSpanThisEvent error:&erro];
+        if (!isReuslt) {
+            NSLog(@"%@",erro);
+            if (completionHandler) {
+                completionHandler(NO);
+            }
+        } else {
+            if (completionHandler) {
+                completionHandler(YES);
+            }
+        }
+    }];
+}
 
 /// 异步获取年份数组
 -(void)asynchronousLoadDataForYear:(NSInteger) year completionHandler:(void(^)(NSArray<EMCalenderMonth *> * array)) completionHandler {
