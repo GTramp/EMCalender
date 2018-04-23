@@ -10,11 +10,12 @@
 #import <NotificationCenter/NotificationCenter.h>
 #import <Masonry.h>
 #import "UIColor+Extension.h"
+#import "EMExtensionView.h"
 
-@interface EMExtensionController ()<NCWidgetProviding,UITableViewDelegate,UITableViewDataSource>
+@interface EMExtensionController ()<NCWidgetProviding>
 
 /// UITableView
-@property(nonatomic,strong) UITableView * tableView;
+@property(nonatomic,strong) EMExtensionView * extensionView;
 
 @end
 
@@ -37,8 +38,8 @@
     self.view.backgroundColor = [UIColor colorWithHex:@"#FFFFFF" alpha:0.5];
     
     // table view
-    [self.view addSubview:self.tableView];
-    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.extensionView];
+    [_extensionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
 }
@@ -55,42 +56,6 @@
     }
     
 }
-
-
-// MARK: - UITableViewDelegate -
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSURL * url = [NSURL URLWithString:@"calender://cn.com.sina.staff.tramp.calender"];
-    [self.extensionContext openURL:url completionHandler:^(BOOL success) {
-        if (success) {
-            NSLog(@"success");
-        } else {
-            NSLog(@"failure");
-        }
-    }];
-}
-
-
-// MARK: - UITableViewDataSource -
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
-}
-
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    
-    cell.backgroundColor = [UIColor randomColor];
-    return cell;
-}
-
 
 // MARK: - NCWidgetProviding -
 
@@ -116,14 +81,13 @@
 // MARK: - 懒加载 -
 
 /// table view
--(UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+-(EMExtensionView *)extensionView {
+    if (!_extensionView) {
+        _extensionView = [[EMExtensionView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     }
-    return _tableView;
+    return _extensionView;
 }
+
+
 
 @end

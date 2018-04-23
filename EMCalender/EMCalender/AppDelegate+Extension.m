@@ -8,6 +8,9 @@
 
 #import "AppDelegate+Extension.h"
 #import "EMMainController.h"
+#import "NSString+Extension.h"
+#import "EMCalenderCreateController.h";
+#import "EMCalenderController.h";
 
 @implementation AppDelegate (Extension)
 
@@ -24,6 +27,27 @@
     UINavigationController * navigationVC = [[UINavigationController alloc] initWithRootViewController:calenderVC];
     self.window.rootViewController = navigationVC;
     [self.window makeKeyAndVisible];
+}
+
+/// extension open url handler
+-(void)extensionOpenUrlHandler:(NSURL *) url {
+    
+    NSString * open = [url.query queryValueForKey:@"open"];
+    NSString * type = [url.query queryValueForKey:@"type"];
+    
+    UIViewController * rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    if ([open isEqualToString:@"create"]) {
+        // calender controller
+        EMCalenderController * calenderVC = [[EMCalenderController alloc] init];
+        // create vc
+        EMCalenderCreateController * createVC = [[EMCalenderCreateController alloc] init];
+        [rootVC presentViewController:calenderVC animated:NO completion:^{
+            [calenderVC presentViewController:createVC animated:YES completion:^{
+                NSLog(@"completion");
+            }];
+        }];
+    }
 }
 
 @end

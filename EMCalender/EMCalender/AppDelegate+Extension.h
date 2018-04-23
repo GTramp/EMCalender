@@ -15,5 +15,8 @@
  初始化
  */
 -(void)initialization;
+
+/// extension open url handler
+-(void)extensionOpenUrlHandler:(NSURL *) url;
     
 @end

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AppDelegate+Extension.h"
+#import "NSString+Extension.h"
 
 @interface AppDelegate ()
 
@@ -23,6 +24,19 @@
     [self initialization];
     
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    NSString * applicationKey = [options objectForKey:UIApplicationOpenURLOptionsSourceApplicationKey];
+    if ([applicationKey isEqualToString:@"com.sina.staff.tramp.calender.EMExtension"]) {
+        
+        [self extensionOpenUrlHandler:url];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 
