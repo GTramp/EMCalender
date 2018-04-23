@@ -18,6 +18,7 @@
 #import "EMCalenderDetailView.h"
 #import "EMWeekDay.h"
 #import "EMEvent.h"
+#import "EMCollectionView.h"
 
 
 @interface EMCalenderView ()<UICollectionViewDataSource,UICollectionViewDelegate,EMCalenderEditViewDelegate>
@@ -25,7 +26,7 @@
 /// header view
 @property(nonatomic,strong) EMCalenderHeader * calenderHeader;
 /// collection View
-@property(nonatomic,strong) UICollectionView * calenderCollection;
+@property(nonatomic,strong) EMCollectionView * calenderCollection;
 /// flowlayout
 @property(nonatomic,strong) UICollectionViewFlowLayout * flowLayout;
 /// EMCalender
@@ -45,6 +46,8 @@
 @property(nonatomic,strong) EMCalenderEditView * calenderEditView;
 /// detail view
 @property(nonatomic,strong) EMCalenderDetailView * calenderDetailView;
+/// NSTimer
+@property(nonatomic,strong) NSTimer * timer;
 
 @end
 
@@ -67,7 +70,28 @@
     _flowLayout.itemSize = _calenderCollection.bounds.size;
 }
 
+-(void)dealloc {
+    [_timer invalidate];
+    _timer = nil;
+}
+
 // MARK: - 自定义方法 -
+
+-(void)timerHandler:(NSTimer *) timer {
+    
+    NSLog(@"%@",_firstCalenderItem.day.date);
+    
+    _currentMonth ++;
+    NSIndexPath * indexPath = [NSIndexPath indexPathForItem:_currentMonth inSection:0];
+    [_calenderCollection scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    
+    NSLog(@"%@",_firstCalenderItem.day.date);
+    
+    if (_firstCalenderItem.day.date) {
+        [timer invalidate];
+    }
+    
+}
 
 /// cancel selected state
 -(void)cancelSelectedItems:(CGPoint) loction {
@@ -262,6 +286,10 @@
     _currentYear = _calender.currentDay.year;
     // current month
     _currentMonth = _calender.currentDay.month;
+    
+    // timer
+    _timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(timerHandler:) userInfo:nil repeats:YES];
+    
     // update weak
     [self.calenderHeader selected:YES index:_calender.currentDay.weakDay.index];
     
@@ -276,6 +304,8 @@
         [weakSelf.calenderCollection scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
         // invoke delegate
         [weakSelf invokeDelegateChange:weakSelf.currentYear month:weakSelf.currentMonth];
+        //
+        [weakSelf.timer fire];
     }];
 }
 
@@ -333,7 +363,7 @@
 /// calender collection
 -(UICollectionView *)calenderCollection {
     if (!_calenderCollection) {
-        _calenderCollection = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
+        _calenderCollection = [[EMCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
         // 预设
         _calenderCollection.delegate = self;
         _calenderCollection.dataSource = self;

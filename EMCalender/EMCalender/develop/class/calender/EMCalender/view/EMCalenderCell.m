@@ -35,6 +35,7 @@
     [self initCalenderItemFrames:_calenderItems];
 }
 
+
 // MARK: - 自定义方法 -
 
 // item in location
@@ -106,6 +107,7 @@
 
 /// 初始化Ui
 -(void)initUi {
+    self.backgroundColor = [UIColor whiteColor];
     //  35 宫格
     [self initCalenderItems];
 }

@@ -18,6 +18,8 @@
 		C745E660208DCA7800727E27 /* EMCalenderEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E65F208DCA7800727E27 /* EMCalenderEditController.m */; };
 		C745E663208DCB1500727E27 /* EMCalenderCreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E662208DCB1500727E27 /* EMCalenderCreateController.m */; };
 		C745E666208DD89800727E27 /* EMEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E665208DD89800727E27 /* EMEvent.m */; };
+		C745E66C208DEE7900727E27 /* UICollectionView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E66B208DEE7900727E27 /* UICollectionView+Extension.m */; };
+		C745E670208DEEF500727E27 /* EMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C745E66F208DEEF500727E27 /* EMCollectionView.m */; };
 		C74696DB2088851200C7EF8C /* EMMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74696DA2088851200C7EF8C /* EMMainController.m */; };
 		C77345A420897AFB00D80F76 /* EMWeekDay.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A320897AFB00D80F76 /* EMWeekDay.m */; };
 		C77345A72089882000D80F76 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A62089882000D80F76 /* UIView+Extension.m */; };
@@ -91,6 +93,10 @@
 		C745E662208DCB1500727E27 /* EMCalenderCreateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMCalenderCreateController.m; sourceTree = "<group>"; };
 		C745E664208DD89800727E27 /* EMEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMEvent.h; sourceTree = "<group>"; };
 		C745E665208DD89800727E27 /* EMEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMEvent.m; sourceTree = "<group>"; };
+		C745E66A208DEE7900727E27 /* UICollectionView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Extension.h"; sourceTree = "<group>"; };
+		C745E66B208DEE7900727E27 /* UICollectionView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Extension.m"; sourceTree = "<group>"; };
+		C745E66E208DEEF500727E27 /* EMCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMCollectionView.h; sourceTree = "<group>"; };
+		C745E66F208DEEF500727E27 /* EMCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMCollectionView.m; sourceTree = "<group>"; };
 		C74696D92088851200C7EF8C /* EMMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMMainController.h; sourceTree = "<group>"; };
 		C74696DA2088851200C7EF8C /* EMMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMMainController.m; sourceTree = "<group>"; };
 		C77345A220897AFB00D80F76 /* EMWeekDay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMWeekDay.h; sourceTree = "<group>"; };
@@ -217,6 +223,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		C745E66D208DEEDE00727E27 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C745E66E208DEEF500727E27 /* EMCollectionView.h */,
+				C745E66F208DEEF500727E27 /* EMCollectionView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		C74696D8208884FB00C7EF8C /* main */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +307,7 @@
 		C7F34AD0208762AB00239101 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				C745E66D208DEEDE00727E27 /* view */,
 				C7F34AD1208762AB00239101 /* extension */,
 			);
 			path = common;
@@ -306,6 +322,8 @@
 				C77345A62089882000D80F76 /* UIView+Extension.m */,
 				C745E648208D969000727E27 /* NSString+Extension.h */,
 				C745E649208D969000727E27 /* NSString+Extension.m */,
+				C745E66A208DEE7900727E27 /* UICollectionView+Extension.h */,
+				C745E66B208DEE7900727E27 /* UICollectionView+Extension.m */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -613,7 +631,9 @@
 				C745E64A208D969000727E27 /* NSString+Extension.m in Sources */,
 				C7F34AF0208762AB00239101 /* UIColor+Extension.m in Sources */,
 				C745E660208DCA7800727E27 /* EMCalenderEditController.m in Sources */,
+				C745E66C208DEE7900727E27 /* UICollectionView+Extension.m in Sources */,
 				C74696DB2088851200C7EF8C /* EMMainController.m in Sources */,
+				C745E670208DEEF500727E27 /* EMCollectionView.m in Sources */,
 				C7F34AFA208762AB00239101 /* EMCalenderEditView.m in Sources */,
 				C7F34AF9208762AB00239101 /* EMCalenderView.m in Sources */,
 			);
