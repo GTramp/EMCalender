@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631914B0B458001D95A6F7D1 /* libPods-EMExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 972250D27F03398D3D494AA3 /* libPods-EMExtension.a */; };
+		C745E647208D867C00727E27 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34AD3208762AB00239101 /* UIColor+Extension.m */; };
 		C74696DB2088851200C7EF8C /* EMMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74696DA2088851200C7EF8C /* EMMainController.m */; };
 		C77345A420897AFB00D80F76 /* EMWeekDay.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A320897AFB00D80F76 /* EMWeekDay.m */; };
 		C77345A72089882000D80F76 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C77345A62089882000D80F76 /* UIView+Extension.m */; };
 		C7BD2DD4208D76520095CC6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7BD2DD3208D76520095CC6A /* Assets.xcassets */; };
+		C7DD0A39208D7D010023EB0A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7DD0A38208D7D010023EB0A /* NotificationCenter.framework */; };
+		C7DD0A3D208D7D010023EB0A /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD0A3C208D7D010023EB0A /* TodayViewController.m */; };
+		C7DD0A40208D7D010023EB0A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7DD0A3E208D7D010023EB0A /* MainInterface.storyboard */; };
+		C7DD0A44208D7D010023EB0A /* EMExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C7DD0A37208D7D010023EB0A /* EMExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C7DD0A4B208D7FF70023EB0A /* EMExtensionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD0A4A208D7FF70023EB0A /* EMExtensionController.m */; };
 		C7F34ABB2087622B00239101 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ABA2087622B00239101 /* AppDelegate.m */; };
 		C7F34ABE2087622B00239101 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F34ABD2087622B00239101 /* ViewController.m */; };
 		C7F34AC12087622B00239101 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F34ABF2087622B00239101 /* Main.storyboard */; };
@@ -32,7 +39,33 @@
 		D0AE488A6B06FFE8EF59533E /* libPods-EMCalender.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7FCDCE62B04A6E77C9D5EBB /* libPods-EMCalender.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C7DD0A42208D7D010023EB0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7F34AAE2087622B00239101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7DD0A36208D7D010023EB0A;
+			remoteInfo = EMExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C7DD0A48208D7D010023EB0A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C7DD0A44208D7D010023EB0A /* EMExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		53E73D2985BF9C7DD0018954 /* Pods-EMExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMExtension/Pods-EMExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		972250D27F03398D3D494AA3 /* libPods-EMExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADC98FDB66600B3BDD7C732A /* Pods-EMCalender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMCalender.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMCalender/Pods-EMCalender.release.xcconfig"; sourceTree = "<group>"; };
 		C74696D92088851200C7EF8C /* EMMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMMainController.h; sourceTree = "<group>"; };
 		C74696DA2088851200C7EF8C /* EMMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMMainController.m; sourceTree = "<group>"; };
@@ -41,6 +74,14 @@
 		C77345A52089882000D80F76 /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		C77345A62089882000D80F76 /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		C7BD2DD3208D76520095CC6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C7DD0A37208D7D010023EB0A /* EMExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EMExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7DD0A38208D7D010023EB0A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		C7DD0A3B208D7D010023EB0A /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		C7DD0A3C208D7D010023EB0A /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		C7DD0A3F208D7D010023EB0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		C7DD0A41208D7D010023EB0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7DD0A49208D7FF70023EB0A /* EMExtensionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMExtensionController.h; sourceTree = "<group>"; };
+		C7DD0A4A208D7FF70023EB0A /* EMExtensionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMExtensionController.m; sourceTree = "<group>"; };
 		C7F34AB62087622B00239101 /* EMCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F34AB92087622B00239101 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C7F34ABA2087622B00239101 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -78,9 +119,19 @@
 		C7F34AFD208762BE00239101 /* AppDelegate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Extension.h"; sourceTree = "<group>"; };
 		E7FCDCE62B04A6E77C9D5EBB /* libPods-EMCalender.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMCalender.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD8674F7AEBE335EB32744B /* Pods-EMCalender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMCalender.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMCalender/Pods-EMCalender.debug.xcconfig"; sourceTree = "<group>"; };
+		F64DF47DA97136630FA22458 /* Pods-EMExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMExtension/Pods-EMExtension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C7DD0A34208D7D010023EB0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7DD0A39208D7D010023EB0A /* NotificationCenter.framework in Frameworks */,
+				631914B0B458001D95A6F7D1 /* libPods-EMExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7F34AB32087622B00239101 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				E7FCDCE62B04A6E77C9D5EBB /* libPods-EMCalender.a */,
+				C7DD0A38208D7D010023EB0A /* NotificationCenter.framework */,
+				972250D27F03398D3D494AA3 /* libPods-EMExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -105,6 +158,8 @@
 			children = (
 				ECD8674F7AEBE335EB32744B /* Pods-EMCalender.debug.xcconfig */,
 				ADC98FDB66600B3BDD7C732A /* Pods-EMCalender.release.xcconfig */,
+				53E73D2985BF9C7DD0018954 /* Pods-EMExtension.debug.xcconfig */,
+				F64DF47DA97136630FA22458 /* Pods-EMExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -118,10 +173,24 @@
 			path = main;
 			sourceTree = "<group>";
 		};
+		C7DD0A3A208D7D010023EB0A /* EMExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C7DD0A49208D7FF70023EB0A /* EMExtensionController.h */,
+				C7DD0A4A208D7FF70023EB0A /* EMExtensionController.m */,
+				C7DD0A41208D7D010023EB0A /* Info.plist */,
+				C7DD0A3B208D7D010023EB0A /* TodayViewController.h */,
+				C7DD0A3C208D7D010023EB0A /* TodayViewController.m */,
+				C7DD0A3E208D7D010023EB0A /* MainInterface.storyboard */,
+			);
+			path = EMExtension;
+			sourceTree = "<group>";
+		};
 		C7F34AAD2087622B00239101 = {
 			isa = PBXGroup;
 			children = (
 				C7F34AB82087622B00239101 /* EMCalender */,
+				C7DD0A3A208D7D010023EB0A /* EMExtension */,
 				C7F34AB72087622B00239101 /* Products */,
 				83B9FEBAB921FB1A9DC106A3 /* Pods */,
 				6DCCAADFF1215310C88E1A05 /* Frameworks */,
@@ -132,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				C7F34AB62087622B00239101 /* EMCalender.app */,
+				C7DD0A37208D7D010023EB0A /* EMExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,6 +328,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C7DD0A36208D7D010023EB0A /* EMExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7DD0A47208D7D010023EB0A /* Build configuration list for PBXNativeTarget "EMExtension" */;
+			buildPhases = (
+				33D656BE2D8BC272A07A891C /* [CP] Check Pods Manifest.lock */,
+				C7DD0A33208D7D010023EB0A /* Sources */,
+				C7DD0A34208D7D010023EB0A /* Frameworks */,
+				C7DD0A35208D7D010023EB0A /* Resources */,
+				DBEF01746EB6BAC52F511981 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EMExtension;
+			productName = EMExtension;
+			productReference = C7DD0A37208D7D010023EB0A /* EMExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C7F34AB52087622B00239101 /* EMCalender */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7F34ACC2087622C00239101 /* Build configuration list for PBXNativeTarget "EMCalender" */;
@@ -268,10 +357,12 @@
 				C7F34AB42087622B00239101 /* Resources */,
 				17EBAFA4BA6B8BF38F622ACD /* [CP] Embed Pods Frameworks */,
 				2F58B0ACE91F1AD5BE0B8AF5 /* [CP] Copy Pods Resources */,
+				C7DD0A48208D7D010023EB0A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C7DD0A43208D7D010023EB0A /* PBXTargetDependency */,
 			);
 			name = EMCalender;
 			productName = EMCalender;
@@ -287,6 +378,9 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = tramp;
 				TargetAttributes = {
+					C7DD0A36208D7D010023EB0A = {
+						CreatedOnToolsVersion = 9.3;
+					};
 					C7F34AB52087622B00239101 = {
 						CreatedOnToolsVersion = 9.3;
 					};
@@ -306,11 +400,20 @@
 			projectRoot = "";
 			targets = (
 				C7F34AB52087622B00239101 /* EMCalender */,
+				C7DD0A36208D7D010023EB0A /* EMExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C7DD0A35208D7D010023EB0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7DD0A40208D7D010023EB0A /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7F34AB42087622B00239101 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,6 +457,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EMCalender/Pods-EMCalender-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		33D656BE2D8BC272A07A891C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EMExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8398A803BD37345789D0B5D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,9 +493,34 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DBEF01746EB6BAC52F511981 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EMExtension/Pods-EMExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C7DD0A33208D7D010023EB0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C745E647208D867C00727E27 /* UIColor+Extension.m in Sources */,
+				C7DD0A3D208D7D010023EB0A /* TodayViewController.m in Sources */,
+				C7DD0A4B208D7FF70023EB0A /* EMExtensionController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7F34AB22087622B00239101 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,7 +549,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C7DD0A43208D7D010023EB0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7DD0A36208D7D010023EB0A /* EMExtension */;
+			targetProxy = C7DD0A42208D7D010023EB0A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		C7DD0A3E208D7D010023EB0A /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7DD0A3F208D7D010023EB0A /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		C7F34ABF2087622B00239101 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -423,6 +585,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C7DD0A45208D7D010023EB0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53E73D2985BF9C7DD0018954 /* Pods-EMExtension.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6W77EGW7S3;
+				INFOPLIST_FILE = EMExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.calender.EMExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C7DD0A46208D7D010023EB0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F64DF47DA97136630FA22458 /* Pods-EMExtension.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6W77EGW7S3;
+				INFOPLIST_FILE = EMExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sina.staff.tramp.calender.EMExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C7F34ACA2087622C00239101 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -580,6 +784,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C7DD0A47208D7D010023EB0A /* Build configuration list for PBXNativeTarget "EMExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7DD0A45208D7D010023EB0A /* Debug */,
+				C7DD0A46208D7D010023EB0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C7F34AB12087622B00239101 /* Build configuration list for PBXProject "EMCalender" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
